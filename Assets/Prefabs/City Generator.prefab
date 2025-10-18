@@ -54,6 +54,7 @@ MonoBehaviour:
   sidewalk: {fileID: 2840092048167253890, guid: 43c474fba7d9e40ba922e748721162e3, type: 3}
   building: {fileID: 3296738085193435695, guid: 9e71300de37a44a94b295c31e7d28fee, type: 3}
   lightpole: {fileID: 3974292775404431938, guid: fa7e17297f252477bb06437d7182e8c7, type: 3}
+  roof: {fileID: 1873584682203476600, guid: 918e9fac28d2d4477bf7f08c05a66b0f, type: 3}
   hardcoded:
   - 2,2
   p_flat_roof: 0

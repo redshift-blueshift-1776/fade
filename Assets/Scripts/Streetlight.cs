@@ -19,12 +19,15 @@ public class Streetlight : MonoBehaviour
 
     private Coroutine currentFlashCoroutine;
     [SerializeField] public GameObject lightCube;
+    private Light lightSource;
+    private const float maxLightSourceBrightness = 15f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         nextChangeTime = BeatManager.Instance.GetNextBeatTime();
         targetRenderer = lightCube.GetComponent<Renderer>();
         emissionColor = targetRenderer.material.GetColor("_EmissionColor");
+        lightSource = lightCube.GetComponent<Light>();
     }
 
     // Update is called once per frame
@@ -71,9 +74,9 @@ public class Streetlight : MonoBehaviour
             targetRenderer.material.EnableKeyword("_EMISSION");
             targetRenderer.material.SetColor("_EmissionColor", newColor);
             //material.SetColor("_BaseColor", Color.Lerp(baseColor, Color.black, t));
-            
+
             //Debug.Log($"Intensity: {newIntensity}, Color: {newColor}");
-            
+            lightSource.intensity = Mathf.Lerp(maxLightSourceBrightness, 0, t);
             elapsed += Time.deltaTime;
             yield return null;
         }

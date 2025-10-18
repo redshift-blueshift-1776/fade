@@ -11,11 +11,16 @@ public class DoorUnlock : MonoBehaviour
     [SerializeField] public GameObject altCamera;
     [SerializeField] public GameObject door;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public float targetAmbientIntensity;
+    public Color targetAmbientColor;
     void Start()
     {
         mainCamera.SetActive(true);
         altCamera.SetActive(false);
         unlockDoor();
+        targetAmbientIntensity = RenderSettings.ambientIntensity;
+        targetAmbientColor = RenderSettings.ambientSkyColor;
     }
 
     // Update is called once per frame
@@ -30,6 +35,8 @@ public class DoorUnlock : MonoBehaviour
 
     public IEnumerator doorAnimation() {
         yield return new WaitForSeconds(2f);
+        RenderSettings.ambientIntensity = 1.0f;
+        RenderSettings.ambientSkyColor = Color.white;
         mainCamera.SetActive(false);
         altCamera.SetActive(true);
         float duration = 3f;
@@ -44,6 +51,8 @@ public class DoorUnlock : MonoBehaviour
         door.transform.position = targetPos;
         mainCamera.SetActive(true);
         altCamera.SetActive(false);
+        RenderSettings.ambientIntensity = targetAmbientIntensity;
+        RenderSettings.ambientSkyColor = targetAmbientColor;
         yield return null;
     }
 }

@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         playerMovement = player.GetComponent<PlayerMovement>();
+        initializeEnvironment();
     }
 
     // Update is called once per frame
@@ -32,6 +33,17 @@ public class GameManager : MonoBehaviour
     {
         handleEnergy();
         updateEnergyDisplay();
+    }
+
+    private void initializeEnvironment()
+    {
+        RenderSettings.skybox = null;
+        RenderSettings.sun = null;
+        RenderSettings.subtractiveShadowColor = Color.black;
+        RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
+        RenderSettings.ambientLight = Color.black;
+        RenderSettings.ambientSkyColor = Color.black;
+        RenderSettings.ambientIntensity = 0.2f;
     }
 
     public void handleEnergy() {

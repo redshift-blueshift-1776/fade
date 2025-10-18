@@ -15,6 +15,12 @@ public class DoorUnlock : MonoBehaviour
 
     public float targetAmbientIntensity;
     public Color targetAmbientColor;
+
+    [SerializeField] private DoorColor doorColor;
+    public enum DoorColor
+    {
+        RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE
+    }
     void Start()
     {
         mainCamera.SetActive(true);

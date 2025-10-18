@@ -9,12 +9,16 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private City_Generator cityGenerator;
     [SerializeField] GameObject player;
-    [SerializeField] private Image energyBar;
+    [SerializeField] private Slider energyBarSlider;
+    [SerializeField] private Image energyBarSymbol;
+    [SerializeField] private TMP_Text energyNumberText;
     [SerializeField] private Image energyBarFill;
     private PlayerMovement playerMovement;
     HashSet<float[]> lightpoleGlobalPositions = new HashSet<float[]>();
     [SerializeField] private float energy = 100;
-    [SerializeField] private float distanceThreshold = 10f;
+    [SerializeField] private float energyGainMultiplier = 20f;
+    [SerializeField] private float energyLossPerSecond = 5f;
+    [SerializeField] private float minDistanceToLightpoleThreshold = 10f;
 
     void Start()
     {
@@ -25,19 +29,21 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         handleEnergy();
+        updateEnergyDisplay();
     }
 
     public void handleEnergy() {
         float distance = getDistanceToClosestLightpole();
 
-        if (distance < distanceThreshold)
+        if (distance < minDistanceToLightpoleThreshold)
         {
-            energy += 10 * Time.deltaTime / distance;
+            energy += energyGainMultiplier * Time.deltaTime / distance;
             energy = Mathf.Min(100, energy);
         }
         else
         {
-            energy -= playerMovement.isBoosting ? 2 * Time.deltaTime : Time.deltaTime;
+            float energyLossMultiplier = playerMovement.isBoosting ? 2 : 1;
+            energy -= energyLossPerSecond * energyLossMultiplier * Time.deltaTime;
         }
 
     }
@@ -61,7 +67,7 @@ public class GameManager : MonoBehaviour
     {
         float minDist = Mathf.Infinity;
         Vector3 playerPos = player.transform.position;
-        
+
         foreach (float[] pos in lightpoleGlobalPositions)
         {
             Vector3 lightpolePos = new Vector3(pos[0], pos[1], pos[2]);
@@ -69,11 +75,20 @@ public class GameManager : MonoBehaviour
             minDist = Mathf.Min(dist, minDist);
 
             //tiny optimization
-            if (minDist < distanceThreshold)
+            if (minDist < minDistanceToLightpoleThreshold)
             {
                 return minDist;
             }
         }
         return minDist;
+    }
+    
+    private void updateEnergyDisplay()
+    {
+        energyNumberText.text = Mathf.Ceil(energy).ToString();
+        energyBarSlider.value = Mathf.Clamp(energy, 0, 100);
+        Color color = Color.Lerp(Color.green, Color.red, 1 - energy / 100);
+        energyBarSymbol.color = color;
+        energyBarFill.color = color;
     }
 }

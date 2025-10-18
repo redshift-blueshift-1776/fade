@@ -31,6 +31,8 @@ public class City_Generator : MonoBehaviour
     [SerializeField] public float p_sloped_roof;
     [SerializeField] public float p_special_roof;
 
+    private HashSet<float[]> lightpoleGlobalPositions;
+
     public HashSet<int> hardcodedLocations;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,6 +43,7 @@ public class City_Generator : MonoBehaviour
 
     public void ParseHardcoded() {
         hardcodedLocations = new HashSet<int>();
+        lightpoleGlobalPositions = new HashSet<float[]>();
         foreach (string s in hardcoded) {
             string[] parts = s.Split(',');
             int x_val = int.Parse(parts[0]);
@@ -66,7 +69,8 @@ public class City_Generator : MonoBehaviour
         newBuilding.transform.localScale = new Vector3(x_length - road_width - 2 * sidewalk_width, (float) height, z_length - road_width - 2 * sidewalk_width);
     }
 
-    public void GenerateRoofedBuilding(int i, int j) {
+    public void GenerateRoofedBuilding(int i, int j)
+    {
         GameObject newBuilding = Instantiate(building);
         float globalX = (i - (x_dimension - 1) / 2) * x_length;
         float globalZ = (j - (z_dimension - 1) / 2) * z_length;
@@ -74,11 +78,35 @@ public class City_Generator : MonoBehaviour
         newBuilding.transform.position = new Vector3(globalX, 0, globalZ);
 
         int height = UnityEngine.Random.Range(1, 6) * 15;
-        newBuilding.transform.localScale = new Vector3(x_length - road_width - 2 * sidewalk_width, (float) height, z_length - road_width - 2 * sidewalk_width);
+        newBuilding.transform.localScale = new Vector3(x_length - road_width - 2 * sidewalk_width, (float)height, z_length - road_width - 2 * sidewalk_width);
 
         GameObject newRoof = Instantiate(roof);
         newRoof.transform.position = new Vector3(globalX, height, globalZ);
-        newRoof.transform.localScale = 100f/12f * new Vector3(x_length - road_width - 2 * sidewalk_width, Mathf.Min(x_length - road_width - 2 * sidewalk_width, (z_length - road_width - 2 * sidewalk_width) / 2f), (z_length - road_width - 2 * sidewalk_width) / 2f);
+        newRoof.transform.localScale = 100f / 12f * new Vector3(x_length - road_width - 2 * sidewalk_width, Mathf.Min(x_length - road_width - 2 * sidewalk_width, (z_length - road_width - 2 * sidewalk_width) / 2f), (z_length - road_width - 2 * sidewalk_width) / 2f);
+    }
+
+    public void GenerateLightPoles(int i, int j)
+    {
+        float globalX;
+        float globalZ;
+        int[,] corner =
+        {
+            {1, 1}, {-1, 1}, {1, -1}, {-1, -1}
+        };
+
+        for (int k = 0; k < 4; k++)
+        {
+            int dx = corner[k, 0];
+            int dz = corner[k, 1];
+            GameObject newLightpole = Instantiate(lightpole);
+            globalX = (i - (x_dimension - 1) / 2) * x_length + dx * (x_length / 2f - road_width / 2f - lightpole_edge_distance);
+            globalZ = (j - (z_dimension - 1) / 2) * z_length + dz * (z_length / 2f - road_width / 2f - lightpole_edge_distance);
+            newLightpole.transform.position = new Vector3(globalX, 0, globalZ);
+            Streetlight sl = newLightpole.GetComponent<Streetlight>();
+            sl.displacement = (i + j) % 4;
+
+            lightpoleGlobalPositions.Add(new float[]{globalX, globalZ});
+        }
     }
 
     public void GenerateCity() {
@@ -100,33 +128,7 @@ public class City_Generator : MonoBehaviour
                 newSidewalk.transform.position = new Vector3(globalX, 0, globalZ);
                 newSidewalk.transform.localScale = new Vector3(x_length - road_width, 1, z_length - road_width);
 
-                GameObject newLightpole = Instantiate(lightpole);
-                globalX = (i - (x_dimension - 1) / 2) * x_length + x_length / 2f - road_width / 2f - lightpole_edge_distance;
-                globalZ = (j - (z_dimension - 1) / 2) * z_length + z_length / 2f - road_width / 2f - lightpole_edge_distance;
-                newLightpole.transform.position = new Vector3(globalX, 0, globalZ);
-                Streetlight sl = newLightpole.GetComponent<Streetlight>();
-                sl.displacement = (i + j) % 4;
-
-                GameObject newLightpole2 = Instantiate(lightpole);
-                globalX = (i - (x_dimension - 1) / 2) * x_length - (x_length / 2f - road_width / 2f - lightpole_edge_distance);
-                globalZ = (j - (z_dimension - 1) / 2) * z_length + z_length / 2f - road_width / 2f - lightpole_edge_distance;
-                newLightpole2.transform.position = new Vector3(globalX, 0, globalZ);
-                sl = newLightpole2.GetComponent<Streetlight>();
-                sl.displacement = (i + j) % 4;
-
-                GameObject newLightpole3 = Instantiate(lightpole);
-                globalX = (i - (x_dimension - 1) / 2) * x_length + x_length / 2f - road_width / 2f - lightpole_edge_distance;
-                globalZ = (j - (z_dimension - 1) / 2) * z_length - (z_length / 2f - road_width / 2f - lightpole_edge_distance);
-                newLightpole3.transform.position = new Vector3(globalX, 0, globalZ);
-                sl = newLightpole3.GetComponent<Streetlight>();
-                sl.displacement = (i + j) % 4;
-
-                GameObject newLightpole4 = Instantiate(lightpole);
-                globalX = (i - (x_dimension - 1) / 2) * x_length - (x_length / 2f - road_width / 2f - lightpole_edge_distance);
-                globalZ = (j - (z_dimension - 1) / 2) * z_length - (z_length / 2f - road_width / 2f - lightpole_edge_distance);
-                newLightpole4.transform.position = new Vector3(globalX, 0, globalZ);
-                sl = newLightpole4.GetComponent<Streetlight>();
-                sl.displacement = (i + j) % 4;
+                GenerateLightPoles(i, j);
             }
         }
     }

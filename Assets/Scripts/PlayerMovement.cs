@@ -21,8 +21,9 @@ public class PlayerMovement : MonoBehaviour
 
     private const float mass = 1.0f;
     private Vector3 velocity = Vector3.zero;
-    
-    private const float swimmingForce = 4f;
+
+    private const float swimmingForce = 3f;
+    private const float fastSwimmingForce = 5f;
     private const float swimmingResistiveCoefficient = 0.25f;
 
     private const float minComponentVelocityThreshold = 0.01f;
@@ -56,8 +57,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void movePlayer()
     {
-
-        Vector3 playerForce = swimmingForce * getPlayerInputDirection();
+        bool isFastSwimming = Input.GetKey(KeyCode.LeftShift);
+        Vector3 playerForce = (isFastSwimming ? fastSwimmingForce : swimmingForce)
+        * getPlayerInputDirection();
 
         Vector3 resistiveForce = -velocity.normalized;
         float resistiveForceComponent = swimmingResistiveCoefficient * velocity.magnitude;

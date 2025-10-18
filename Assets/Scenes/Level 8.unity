@@ -316,6 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72906991cadaf44e29a57e7443ecea79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 1748425642}
   mainCamera: {fileID: 295947967}
   altCamera: {fileID: 172542290}
   door: {fileID: 1268057591}
@@ -445,61 +446,9 @@ PrefabInstance:
       propertyPath: sliderY
       value: 
       objectReference: {fileID: 255221139}
-    - target: {fileID: 2475775258002019593, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4191827471072171953, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: m_Type
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4191827471072171953, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: m_Range
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 4191827471072171953, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4191827471072171953, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4191827471072171953, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4191827471072171953, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: m_DrawHalo
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4191827471072171953, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: m_Intensity
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4191827471072171953, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: m_SpotAngle
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4191827471072171953, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: m_CookieSize
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4191827471072171953, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: m_InnerSpotAngle
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4191827471072171953, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: m_Shadows.m_Type
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4777624969639749158, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 5866885111505362723, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7200463188200083511, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
       propertyPath: m_LocalPosition.x

@@ -7,6 +7,7 @@ using UnityEngine.Rendering;
 
 public class DoorUnlock : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     [SerializeField] public GameObject mainCamera;
     [SerializeField] public GameObject altCamera;
     [SerializeField] public GameObject door;
@@ -35,6 +36,7 @@ public class DoorUnlock : MonoBehaviour
 
     public IEnumerator doorAnimation() {
         yield return new WaitForSeconds(2f);
+        gameManager.setIsInCutscene(true);
         RenderSettings.ambientIntensity = 1.0f;
         RenderSettings.ambientSkyColor = Color.white;
         mainCamera.SetActive(false);
@@ -53,6 +55,7 @@ public class DoorUnlock : MonoBehaviour
         altCamera.SetActive(false);
         RenderSettings.ambientIntensity = targetAmbientIntensity;
         RenderSettings.ambientSkyColor = targetAmbientColor;
+        gameManager.setIsInCutscene(false);
         yield return null;
     }
 }

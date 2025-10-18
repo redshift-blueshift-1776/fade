@@ -105,6 +105,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = Vector3.zero;
         Vector3 forward = transform.forward;
         Vector3 right = transform.right;
+        
         if (Input.GetKey(KeyCode.W))
         {
             direction += forward;
@@ -120,6 +121,14 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             direction += right;
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            direction += Vector3.up;
+        }
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            direction += Vector3.down;
         }
         return direction.normalized;
     }

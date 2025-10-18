@@ -10,6 +10,7 @@ using UnityEngine.Rendering;
 public class City_Generator : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private bool menuOrLevelSelect;
 
     [Header("Dimensions")]
     [SerializeField] public int x_dimension; // Should be an odd number
@@ -145,7 +146,9 @@ public class City_Generator : MonoBehaviour
                 GenerateLightPoles(i, j);
             }
         }
-        gameManager.storeLightpoleGlobalPositions();
+        if (!menuOrLevelSelect) {
+            gameManager.storeLightpoleGlobalPositions();
+        }
     }
     
     public HashSet<float[]> getLightpoleGlobalPositions()

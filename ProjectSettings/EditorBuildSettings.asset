@@ -38,5 +38,32 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level Select.unity
     guid: 1bdb1f4d1f5ca49b5bb72987b087aabb
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Cutscene 1.unity
+    guid: 78c2d3faae38548eca05682fd85183a8
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Cutscene 2.unity
+    guid: c0624f19e39654efa9def567981c4a67
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Cutscene 3.unity
+    guid: 111ec20ff647840129ec314b278697f2
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Cutscene 4.unity
+    guid: 69ca2afb3366a42fc8484b566fbbb9c6
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Cutscene 5.unity
+    guid: def05d4be471c4102a093eeab54f6d6d
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Cutscene 6.unity
+    guid: 085dc2b1ccd9d45c7bde0191247695e9
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Cutscene 7.unity
+    guid: 5696a0395b7664f508410cb2a5d99be1
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Cutscene 8.unity
+    guid: b4be3bf6a9e324f1cb956c15ed163839
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Eaten Cutscene.unity
+    guid: 6b5f099cca0dd4ca88e8bc9be4bb8819
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

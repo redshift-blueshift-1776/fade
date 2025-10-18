@@ -56,21 +56,29 @@ public class City_Generator : MonoBehaviour
                 globalX = (i - (x_dimension - 1) / 2) * x_length + x_length / 2f - road_width / 2f - lightpole_edge_distance;
                 globalZ = (j - (z_dimension - 1) / 2) * z_length + z_length / 2f - road_width / 2f - lightpole_edge_distance;
                 newLightpole.transform.position = new Vector3(globalX, 0, globalZ);
+                Streetlight sl = newLightpole.GetComponent<Streetlight>();
+                sl.displacement = (i + j) % 4;
 
                 GameObject newLightpole2 = Instantiate(lightpole);
                 globalX = (i - (x_dimension - 1) / 2) * x_length - (x_length / 2f - road_width / 2f - lightpole_edge_distance);
                 globalZ = (j - (z_dimension - 1) / 2) * z_length + z_length / 2f - road_width / 2f - lightpole_edge_distance;
                 newLightpole2.transform.position = new Vector3(globalX, 0, globalZ);
+                sl = newLightpole2.GetComponent<Streetlight>();
+                sl.displacement = (i + j) % 4;
 
                 GameObject newLightpole3 = Instantiate(lightpole);
                 globalX = (i - (x_dimension - 1) / 2) * x_length + x_length / 2f - road_width / 2f - lightpole_edge_distance;
                 globalZ = (j - (z_dimension - 1) / 2) * z_length - (z_length / 2f - road_width / 2f - lightpole_edge_distance);
                 newLightpole3.transform.position = new Vector3(globalX, 0, globalZ);
+                sl = newLightpole3.GetComponent<Streetlight>();
+                sl.displacement = (i + j) % 4;
 
                 GameObject newLightpole4 = Instantiate(lightpole);
                 globalX = (i - (x_dimension - 1) / 2) * x_length - (x_length / 2f - road_width / 2f - lightpole_edge_distance);
                 globalZ = (j - (z_dimension - 1) / 2) * z_length - (z_length / 2f - road_width / 2f - lightpole_edge_distance);
                 newLightpole4.transform.position = new Vector3(globalX, 0, globalZ);
+                sl = newLightpole4.GetComponent<Streetlight>();
+                sl.displacement = (i + j) % 4;
             }
         }
     }

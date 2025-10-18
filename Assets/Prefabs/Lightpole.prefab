@@ -132,6 +132,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c221778502e4092ba7c0c9d639d523, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displacement: 0
+  secondsPerBeat: 0
+  tempo: 90
+  nextChangeTime: 0
+  lastColorBeat: -1
+  lightCube: {fileID: 7568662918275208187}
+  bright_color: {r: 1, g: 1, b: 1, a: 0}
+  dark_color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &7568662918275208187
 GameObject:
   m_ObjectHideFlags: 0

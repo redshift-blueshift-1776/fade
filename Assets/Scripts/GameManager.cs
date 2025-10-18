@@ -46,6 +46,10 @@ public class GameManager : MonoBehaviour
             energy -= energyLossPerSecond * energyLossMultiplier * Time.deltaTime;
         }
 
+        if (energy < 0)
+        {
+            killPlayer();
+        }
     }
 
     //can not be called in Start, as generation might be finished after
@@ -82,13 +86,18 @@ public class GameManager : MonoBehaviour
         }
         return minDist;
     }
-    
+
     private void updateEnergyDisplay()
     {
-        energyNumberText.text = Mathf.Ceil(energy).ToString();
+        energyNumberText.text = Mathf.Ceil(Mathf.Clamp(energy, 0, 100)).ToString();
         energyBarSlider.value = Mathf.Clamp(energy, 0, 100);
         Color color = Color.Lerp(Color.green, Color.red, 1 - energy / 100);
         energyBarSymbol.color = color;
         energyBarFill.color = color;
+    }
+    
+    private void killPlayer()
+    {
+        Debug.Log("you are dead!");
     }
 }

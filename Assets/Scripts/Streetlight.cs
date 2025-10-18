@@ -14,6 +14,8 @@ public class Streetlight : MonoBehaviour
 
     public int lastColorBeat = -1;
 
+    private Color emissionColor = new Color(191, 61, 0, 255);
+
     [SerializeField] public GameObject lightCube;
     [SerializeField] public Color bright_color;
     [SerializeField] public Color dark_color;
@@ -43,16 +45,14 @@ public class Streetlight : MonoBehaviour
 
     public IEnumerator FlashColor() {
         float elapsed = 0f;
-        float duration = 3 * (float) BeatManager.Instance.GetSecondsPerBeat();
+        float duration = 3 * (float)BeatManager.Instance.GetSecondsPerBeat();
+        Renderer targetRenderer = lightCube.GetComponent<Renderer>();
         while (elapsed < duration) {
             float t = elapsed / duration;
             // lightCube.GetComponent<MeshRenderer>().material.color = Color.Lerp(bright_color, dark_color, t);
-            Renderer targetRenderer = lightCube.GetComponent<Renderer>();
-            Color emissionColor = lightCube.GetComponent<Renderer>().material.color;
             Material material = targetRenderer.material;
             material.EnableKeyword("_EMISSION");
-            Color finalEmissionColor = emissionColor * Mathf.Lerp(1, 0, t);
-            material.SetColor("_EmissionColor", finalEmissionColor);
+            material.SetColor("_EmissionColor", Color.Lerp(emissionColor, Color.black, t));
             elapsed += Time.deltaTime;
             yield return null;
         }

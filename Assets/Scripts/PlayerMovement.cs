@@ -23,10 +23,12 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
 
     private const float swimmingForce = 3f;
-    private const float fastSwimmingForce = 5f;
+    private const float fastSwimmingForce = 10f;
     private const float swimmingResistiveCoefficient = 0.25f;
 
     private const float minComponentVelocityThreshold = 0.01f;
+
+    public bool isBoosting;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -58,6 +60,7 @@ public class PlayerMovement : MonoBehaviour
     private void movePlayer()
     {
         bool isFastSwimming = Input.GetKey(KeyCode.LeftShift);
+        isBoosting = isFastSwimming;
         Vector3 playerForce = (isFastSwimming ? fastSwimmingForce : swimmingForce)
         * getPlayerInputDirection();
 

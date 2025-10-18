@@ -75,6 +75,7 @@ public class GameSettings : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             AudioListener.pause = false;
+            Time.timeScale = 1f;
         } else
         {
             inSettings = true;
@@ -93,6 +94,7 @@ public class GameSettings : MonoBehaviour
                     mouseSettingsPage.SetActive(true);
                     break;
             }
+            Time.timeScale = 0f;
         }
         settings.SetActive(inSettings);
     }

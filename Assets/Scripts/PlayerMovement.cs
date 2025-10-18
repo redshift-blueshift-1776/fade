@@ -1,5 +1,7 @@
 using UnityEngine;
 
+using UnityEngine.UI;
+
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,6 +12,10 @@ public class PlayerMovement : MonoBehaviour
 
     private float sensitivityX = 2.5f;
     private float sensitivityY = 2;
+
+    public Slider sliderX;
+    public Slider sliderY;
+
     private float yaw;
     private float pitch;
 
@@ -31,12 +37,16 @@ public class PlayerMovement : MonoBehaviour
         {
             yaw -= Mathf.Sign(yaw) * 360f;
         }
+
+        sensitivityX = sliderX.value;
+        sensitivityY = sliderY.value;
     }
 
     // Update is called once per frame
     void Update()
     {
         moveCamera();
+        handleSensitivityChange();
     }
 
     void FixedUpdate()
@@ -115,5 +125,11 @@ public class PlayerMovement : MonoBehaviour
         pitch = Mathf.Clamp(pitch, -90f, 90f);
 
         transform.localRotation = Quaternion.Euler(pitch, yaw, 0);
+    }
+
+    private void handleSensitivityChange()
+    {
+        sensitivityX = sliderX.value;
+        sensitivityY = sliderY.value;
     }
 }

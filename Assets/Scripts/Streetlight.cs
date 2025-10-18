@@ -35,7 +35,7 @@ public class Streetlight : MonoBehaviour
 
     public IEnumerator FlashColor() {
         float elapsed = 0f;
-        float duration = 3 * BeatManager.Instance.GetSecondsPerBeat();
+        float duration = 3 * (float) BeatManager.Instance.GetSecondsPerBeat();
         while (elapsed < duration) {
             elapsed += Time.deltaTime;
             yield return null;

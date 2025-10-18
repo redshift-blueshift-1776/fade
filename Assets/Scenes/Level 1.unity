@@ -417,6 +417,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1148838688 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3296738085193435695, guid: 9e71300de37a44a94b295c31e7d28fee, type: 3}
+  m_PrefabInstance: {fileID: 6607168483591103235}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1538757261 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2840092048167253890, guid: 43c474fba7d9e40ba922e748721162e3, type: 3}
+  m_PrefabInstance: {fileID: 6630296686204393122}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1844627379
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +436,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1844627380}
+  - component: {fileID: 1844627381}
   m_Layer: 0
   m_Name: City Generator
   m_TagString: Untagged
@@ -448,6 +459,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1844627381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844627379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f99edab31db74b029a1f3a3ba722b7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x_dimension: 5
+  z_dimension: 5
+  x_length: 50
+  z_length: 50
+  sidewalk: {fileID: 1538757261}
+  building: {fileID: 1148838688}
+  lightpole: {fileID: 0}
 --- !u!1001 &6607168483591103235
 PrefabInstance:
   m_ObjectHideFlags: 0

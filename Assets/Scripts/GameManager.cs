@@ -11,29 +11,33 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] private Image energyBar;
     [SerializeField] private Image energyBarFill;
-    private PlayerMovement pm;
+    private PlayerMovement playerMovement;
     HashSet<float[]> lightpoleGlobalPositions = new HashSet<float[]>();
     [SerializeField] private float energy = 100;
-    [SerializeField] private float distanceThreshold = 10;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] private float distanceThreshold = 10f;
+
     void Start()
     {
-        pm = player.GetComponent<PlayerMovement>();
+        playerMovement = player.GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        HandleEnergy();
+        handleEnergy();
     }
 
-    public void HandleEnergy() {
+    public void handleEnergy() {
         float distance = getDistanceToClosestLightpole();
-        if (distance < distanceThreshold) {
-            Debug.Log("Close to lightpole, charging");
-            energy = Mathf.Min(100, energy + Time.deltaTime);
-        } else {
-            energy -= (pm.isBoosting ? 2 * Time.deltaTime : Time.deltaTime);
+
+        if (distance < distanceThreshold)
+        {
+            energy += 10 * Time.deltaTime / distance;
+            energy = Mathf.Min(100, energy);
+        }
+        else
+        {
+            energy -= playerMovement.isBoosting ? 2 * Time.deltaTime : Time.deltaTime;
         }
 
     }
@@ -42,14 +46,14 @@ public class GameManager : MonoBehaviour
     public void storeLightpoleGlobalPositions()
     {
         lightpoleGlobalPositions = cityGenerator.getLightpoleGlobalPositions();
-        debugLightpoleGlobalPositions();
+        //debugLightpoleGlobalPositions();
     }
 
     private void debugLightpoleGlobalPositions()
     {
         foreach (float[] pos in lightpoleGlobalPositions)
         {
-            Debug.Log(pos[0] + " " + pos[1]);
+            Debug.Log(pos[0] + " " + pos[1] + " " + pos[2]);
         }
     }
 
@@ -57,10 +61,18 @@ public class GameManager : MonoBehaviour
     {
         float minDist = Mathf.Infinity;
         Vector3 playerPos = player.transform.position;
-
+        
         foreach (float[] pos in lightpoleGlobalPositions)
         {
-            float dist = Mathf.Sqrt(Mathf.Pow(pos[0], 2) + Mathf.Pow(pos[1], 2));
+            Vector3 lightpolePos = new Vector3(pos[0], pos[1], pos[2]);
+            float dist = (playerPos - lightpolePos).magnitude;
+            minDist = Mathf.Min(dist, minDist);
+
+            //tiny optimization
+            if (minDist < distanceThreshold)
+            {
+                return minDist;
+            }
         }
         return minDist;
     }

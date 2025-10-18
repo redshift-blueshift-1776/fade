@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
 
     private const float swimmingForce = 3f;
-    private const float fastSwimmingForce = 10f;
+    private const float fastSwimmingForce = 7f;
     private const float swimmingResistiveCoefficient = 0.25f;
 
     private const float minComponentVelocityThreshold = 0.01f;
@@ -48,7 +48,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveCamera();
+        if (Time.timeScale != 0)
+        {
+            moveCamera();
+        }
         handleSensitivityChange();
     }
 
@@ -61,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
     {
         bool isFastSwimming = Input.GetKey(KeyCode.LeftShift);
         isBoosting = isFastSwimming;
+
         Vector3 playerForce = (isFastSwimming ? fastSwimmingForce : swimmingForce)
         * getPlayerInputDirection();
 

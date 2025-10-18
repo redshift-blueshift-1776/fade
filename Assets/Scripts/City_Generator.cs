@@ -8,12 +8,14 @@ using UnityEngine.SceneManagement;
 
 public class City_Generator : MonoBehaviour
 {
+    [Header("Dimensions")]
     [SerializeField] public int x_dimension; // Should be an odd number
     [SerializeField] public int z_dimension; // Should be an odd number
     [SerializeField] public float x_length;
     [SerializeField] public float z_length;
     [SerializeField] public float sidewalk_width;
     [SerializeField] public float road_width;
+    [SerializeField] public float lightpole_edge_distance;
 
     [Header("Prefabs")]
     [SerializeField] public GameObject sidewalk;
@@ -41,7 +43,7 @@ public class City_Generator : MonoBehaviour
                 newBuilding.transform.position = new Vector3(globalX, 0, globalZ);
 
                 int height = UnityEngine.Random.Range(1, 6) * 15;
-                newBuilding.transform.localScale = new Vector3(1, (float) height, 1);
+                newBuilding.transform.localScale = new Vector3(x_length - road_width - 2 * sidewalk_width, (float) height, z_length - road_width - 2 * sidewalk_width);
 
                 GameObject newSidewalk = Instantiate(sidewalk);
                 globalX = (i - (x_dimension - 1) / 2) * x_length;
@@ -49,6 +51,26 @@ public class City_Generator : MonoBehaviour
 
                 newSidewalk.transform.position = new Vector3(globalX, 0, globalZ);
                 newSidewalk.transform.localScale = new Vector3(x_length - road_width, 1, z_length - road_width);
+
+                GameObject newLightpole = Instantiate(lightpole);
+                globalX = (i - (x_dimension - 1) / 2) * x_length + x_length / 2f - road_width / 2f - lightpole_edge_distance;
+                globalZ = (j - (z_dimension - 1) / 2) * z_length + z_length / 2f - road_width / 2f - lightpole_edge_distance;
+                newLightpole.transform.position = new Vector3(globalX, 0, globalZ);
+
+                GameObject newLightpole2 = Instantiate(lightpole);
+                globalX = (i - (x_dimension - 1) / 2) * x_length - (x_length / 2f - road_width / 2f - lightpole_edge_distance);
+                globalZ = (j - (z_dimension - 1) / 2) * z_length + z_length / 2f - road_width / 2f - lightpole_edge_distance;
+                newLightpole2.transform.position = new Vector3(globalX, 0, globalZ);
+
+                GameObject newLightpole3 = Instantiate(lightpole);
+                globalX = (i - (x_dimension - 1) / 2) * x_length + x_length / 2f - road_width / 2f - lightpole_edge_distance;
+                globalZ = (j - (z_dimension - 1) / 2) * z_length - (z_length / 2f - road_width / 2f - lightpole_edge_distance);
+                newLightpole3.transform.position = new Vector3(globalX, 0, globalZ);
+
+                GameObject newLightpole4 = Instantiate(lightpole);
+                globalX = (i - (x_dimension - 1) / 2) * x_length - (x_length / 2f - road_width / 2f - lightpole_edge_distance);
+                globalZ = (j - (z_dimension - 1) / 2) * z_length - (z_length / 2f - road_width / 2f - lightpole_edge_distance);
+                newLightpole4.transform.position = new Vector3(globalX, 0, globalZ);
             }
         }
     }

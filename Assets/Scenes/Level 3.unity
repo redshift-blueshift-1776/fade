@@ -600,10 +600,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cityGenerator: {fileID: 1866327563}
   player: {fileID: 295947966}
-  energyBar: {fileID: 0}
+  energyBarSlider: {fileID: 0}
+  energyBarSymbol: {fileID: 0}
+  energyNumberText: {fileID: 0}
   energyBarFill: {fileID: 0}
   energy: 100
-  distanceThreshold: 5
+  energyGainMultiplier: 20
+  energyLossPerSecond: 5
+  minDistanceToLightpoleThreshold: 10
 --- !u!4 &366682776
 Transform:
   m_ObjectHideFlags: 0
@@ -2164,7 +2168,7 @@ AudioSource:
   m_Resource: {fileID: 8300000, guid: b65f20dcf6d1644a2ad516e8180ad57a, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 1
+  m_Pitch: 0.9
   Loop: 1
   Mute: 0
   Spatialize: 0

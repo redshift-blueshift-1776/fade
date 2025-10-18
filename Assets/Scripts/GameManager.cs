@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     HashSet<float[]> lightpoleGlobalPositions = new HashSet<float[]>();
     [SerializeField] private float energy = 100;
     [SerializeField] private float energyGainMultiplier = 20f;
-    [SerializeField] private float energyLossPerSecond = 5f;
+    [SerializeField] private float energyLossPerSecond = 3f;
     [SerializeField] private float minDistanceToLightpoleThreshold = 10f;
 
     void Start()

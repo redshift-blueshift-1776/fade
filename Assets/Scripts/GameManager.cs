@@ -15,10 +15,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image energyBarFill;
     private PlayerMovement playerMovement;
     HashSet<float[]> lightpoleGlobalPositions = new HashSet<float[]>();
-    [SerializeField] private float energy = 100;
-    [SerializeField] private float energyGainMultiplier = 20f;
-    [SerializeField] private float energyLossPerSecond = 3f;
-    [SerializeField] private float minDistanceToLightpoleThreshold = 10f;
+    private float energy = 100;
+    private float energyGainMultiplier = 20f;
+    private float energyLossPerSecond = 3f;
+    private float minDistanceToLightpoleThreshold = 10f;
 
     private bool isInCutscene = false;
 
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
 
     public void handleEnergy() {
         float distance = getDistanceToClosestLightpole();
-
+        
         if (distance < minDistanceToLightpoleThreshold)
         {
             energy += energyGainMultiplier * Time.deltaTime / distance;

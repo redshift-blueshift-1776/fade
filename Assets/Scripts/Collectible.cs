@@ -3,6 +3,7 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private AudioManager audioManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,6 +22,7 @@ public class Collectible : MonoBehaviour
         {
             gameManager.collectedCollectible();
             gameObject.SetActive(false);
+            audioManager.playSound("pickupCollectible");
         }
     }
 }

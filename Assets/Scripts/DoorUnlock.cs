@@ -80,12 +80,12 @@ public class DoorUnlock : MonoBehaviour
     }
 
     public void unlockDoor() {
-        StartCoroutine(doorAnimation());
+        StartCoroutine(doorAnimation(0));
     }
 
-    public IEnumerator doorAnimation()
+    public IEnumerator doorAnimation(float delay)
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(delay);
         gameManager.setIsInCutscene(true);
         RenderSettings.reflectionIntensity = 1.0f;
         RenderSettings.ambientIntensity = 0.3f;

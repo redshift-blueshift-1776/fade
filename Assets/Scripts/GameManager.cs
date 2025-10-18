@@ -117,9 +117,14 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("you are dead!");
     }
-    
+
     public void setIsInCutscene(bool b)
     {
         isInCutscene = b;
+    }
+    
+    public void collectedCollectible()
+    {
+        Debug.Log("collected collectible!");
     }
 }

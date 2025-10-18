@@ -20,7 +20,7 @@ public class Streetlight : MonoBehaviour
     private Coroutine currentFlashCoroutine;
     [SerializeField] public GameObject lightCube;
     private Light lightSource;
-    private const float maxLightSourceBrightness = 15f;
+    [SerializeField] private float maxLightSourceRange = 30f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -76,7 +76,7 @@ public class Streetlight : MonoBehaviour
             //material.SetColor("_BaseColor", Color.Lerp(baseColor, Color.black, t));
 
             //Debug.Log($"Intensity: {newIntensity}, Color: {newColor}");
-            lightSource.intensity = Mathf.Lerp(maxLightSourceBrightness, 0, t);
+            lightSource.range = Mathf.Lerp(maxLightSourceRange, 0, t);
             elapsed += Time.deltaTime;
             yield return null;
         }

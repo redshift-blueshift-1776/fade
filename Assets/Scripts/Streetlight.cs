@@ -43,8 +43,7 @@ public class Streetlight : MonoBehaviour
 
     public IEnumerator FlashColor() {
         float elapsed = 0f;
-        float duration = 3f * (float) BeatManager.Instance.GetSecondsPerBeat();
-        // Debug.Log(duration);
+        float duration = 3 * (float) BeatManager.Instance.GetSecondsPerBeat();
         while (elapsed < duration) {
             float t = elapsed / duration;
             // lightCube.GetComponent<MeshRenderer>().material.color = Color.Lerp(bright_color, dark_color, t);

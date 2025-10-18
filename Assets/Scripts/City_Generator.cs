@@ -5,9 +5,12 @@ using System.Collections;
 using System;
 // using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering;
 
 public class City_Generator : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
+
     [Header("Dimensions")]
     [SerializeField] public int x_dimension; // Should be an odd number
     [SerializeField] public int z_dimension; // Should be an odd number
@@ -88,7 +91,10 @@ public class City_Generator : MonoBehaviour
     public void GenerateLightPoles(int i, int j)
     {
         float globalX;
+        float globalY;
         float globalZ;
+        const float lightSourceLocalYOffset = 10.5f;
+
         int[,] corner =
         {
             {1, 1}, {-1, 1}, {1, -1}, {-1, -1}
@@ -100,23 +106,31 @@ public class City_Generator : MonoBehaviour
             int dz = corner[k, 1];
             GameObject newLightpole = Instantiate(lightpole);
             globalX = (i - (x_dimension - 1) / 2) * x_length + dx * (x_length / 2f - road_width / 2f - lightpole_edge_distance);
+            globalY = 0;
             globalZ = (j - (z_dimension - 1) / 2) * z_length + dz * (z_length / 2f - road_width / 2f - lightpole_edge_distance);
-            newLightpole.transform.position = new Vector3(globalX, 0, globalZ);
+            newLightpole.transform.position = new Vector3(globalX, globalY, globalZ);
             Streetlight sl = newLightpole.GetComponent<Streetlight>();
             sl.displacement = (i + j) % 4;
 
-            lightpoleGlobalPositions.Add(new float[]{globalX, globalZ});
+            lightpoleGlobalPositions.Add(new float[]{globalX, globalY + lightSourceLocalYOffset, globalZ});
         }
     }
 
-    public void GenerateCity() {
-        for (int i = 0; i < x_dimension; i++) {
-            for (int j = 0; j < z_dimension; j++) {
-                if (!hardcodedLocations.Contains(z_dimension * i + j)) {
+    public void GenerateCity()
+    {
+        for (int i = 0; i < x_dimension; i++)
+        {
+            for (int j = 0; j < z_dimension; j++)
+            {
+                if (!hardcodedLocations.Contains(z_dimension * i + j))
+                {
                     float rv = UnityEngine.Random.Range(0f, 1f);
-                    if (rv < p_flat_roof) {
+                    if (rv < p_flat_roof)
+                    {
                         GenerateBuilding(i, j);
-                    } else if (rv < p_flat_roof + p_sloped_roof) {
+                    }
+                    else if (rv < p_flat_roof + p_sloped_roof)
+                    {
                         GenerateRoofedBuilding(i, j);
                     }
                 }
@@ -131,5 +145,11 @@ public class City_Generator : MonoBehaviour
                 GenerateLightPoles(i, j);
             }
         }
+        gameManager.storeLightpoleGlobalPositions();
+    }
+    
+    public HashSet<float[]> getLightpoleGlobalPositions()
+    {
+        return lightpoleGlobalPositions;
     }
 }

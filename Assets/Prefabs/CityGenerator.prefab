@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1577397504664487499}
   - component: {fileID: 2235359772656600782}
   m_Layer: 0
-  m_Name: City Generator
+  m_Name: CityGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

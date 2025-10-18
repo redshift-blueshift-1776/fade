@@ -7,19 +7,26 @@ using UnityEngine.Rendering;
 
 public class DoorUnlock : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     [SerializeField] public GameObject mainCamera;
     [SerializeField] public GameObject altCamera;
     [SerializeField] public GameObject door;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
-    public float targetAmbientIntensity;
+    public float targetReflectionIntensity;
     public Color targetAmbientColor;
+
+    [SerializeField] private DoorColor doorColor;
+    public enum DoorColor
+    {
+        RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE
+    }
     void Start()
     {
         mainCamera.SetActive(true);
         altCamera.SetActive(false);
         unlockDoor();
-        targetAmbientIntensity = RenderSettings.ambientIntensity;
+        targetReflectionIntensity = RenderSettings.reflectionIntensity;
         targetAmbientColor = RenderSettings.ambientSkyColor;
     }
 
@@ -35,7 +42,9 @@ public class DoorUnlock : MonoBehaviour
 
     public IEnumerator doorAnimation() {
         yield return new WaitForSeconds(2f);
-        RenderSettings.ambientIntensity = 1.0f;
+        gameManager.setIsInCutscene(true);
+        RenderSettings.reflectionIntensity = 1.0f;
+        RenderSettings.ambientIntensity = 0.3f;
         RenderSettings.ambientSkyColor = Color.white;
         mainCamera.SetActive(false);
         altCamera.SetActive(true);
@@ -51,8 +60,10 @@ public class DoorUnlock : MonoBehaviour
         door.transform.position = targetPos;
         mainCamera.SetActive(true);
         altCamera.SetActive(false);
-        RenderSettings.ambientIntensity = targetAmbientIntensity;
+        RenderSettings.reflectionIntensity = targetReflectionIntensity;
+        RenderSettings.ambientIntensity = 0;
         RenderSettings.ambientSkyColor = targetAmbientColor;
+        gameManager.setIsInCutscene(false);
         yield return null;
     }
 }

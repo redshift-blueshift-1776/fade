@@ -20,9 +20,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float energyLossPerSecond = 3f;
     [SerializeField] private float minDistanceToLightpoleThreshold = 10f;
 
+    private bool isInCutscene = false;
+
     void Start()
     {
         playerMovement = player.GetComponent<PlayerMovement>();
+        initializeEnvironment();
     }
 
     // Update is called once per frame
@@ -30,6 +33,20 @@ public class GameManager : MonoBehaviour
     {
         handleEnergy();
         updateEnergyDisplay();
+    }
+
+    private void initializeEnvironment()
+    {
+        RenderSettings.skybox = null;
+        RenderSettings.sun = null;
+        RenderSettings.subtractiveShadowColor = Color.black;
+        RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
+        RenderSettings.ambientLight = Color.black;
+        RenderSettings.ambientSkyColor = Color.black;
+        RenderSettings.ambientIntensity = 0f;
+        RenderSettings.reflectionIntensity = 0.2f;
+
+        DynamicGI.UpdateEnvironment(); 
     }
 
     public void handleEnergy() {
@@ -40,7 +57,7 @@ public class GameManager : MonoBehaviour
             energy += energyGainMultiplier * Time.deltaTime / distance;
             energy = Mathf.Min(100, energy);
         }
-        else
+        else if (!isInCutscene)
         {
             float energyLossMultiplier = playerMovement.isBoosting ? 2 : 1;
             energy -= energyLossPerSecond * energyLossMultiplier * Time.deltaTime;
@@ -95,9 +112,14 @@ public class GameManager : MonoBehaviour
         energyBarSymbol.color = color;
         energyBarFill.color = color;
     }
-    
+
     private void killPlayer()
     {
         Debug.Log("you are dead!");
+    }
+    
+    public void setIsInCutscene(bool b)
+    {
+        isInCutscene = b;
     }
 }

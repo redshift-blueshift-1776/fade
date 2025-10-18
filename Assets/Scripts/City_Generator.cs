@@ -26,6 +26,7 @@ public class City_Generator : MonoBehaviour
     [SerializeField] public GameObject building;
     [SerializeField] public GameObject lightpole;
     [SerializeField] public GameObject roof;
+    [SerializeField] public GameObject specialRoof;
 
     [Header("Hardcoded")]
     [SerializeField] public string[] hardcoded;
@@ -89,6 +90,37 @@ public class City_Generator : MonoBehaviour
         newRoof.transform.localScale = 100f / 12f * new Vector3(x_length - road_width - 2 * sidewalk_width, Mathf.Min(x_length - road_width - 2 * sidewalk_width, (z_length - road_width - 2 * sidewalk_width) / 2f), (z_length - road_width - 2 * sidewalk_width) / 2f);
     }
 
+    public void GenerateSpecialRoofedBuilding(int i, int j)
+    {
+        GameObject newBuilding = Instantiate(building);
+        float globalX = (i - (x_dimension - 1) / 2) * x_length;
+        float globalZ = (j - (z_dimension - 1) / 2) * z_length;
+
+        newBuilding.transform.position = new Vector3(globalX, 0, globalZ);
+
+        int height = UnityEngine.Random.Range(1, 6) * 15;
+        float building_x_length = x_length - road_width - 2 * sidewalk_width;
+        float building_z_length = z_length - road_width - 2 * sidewalk_width;
+        newBuilding.transform.localScale = new Vector3(building_x_length, (float)height, building_z_length);
+
+        GameObject newSpecialRoof = Instantiate(specialRoof);
+        float true_width = (building_z_length + sidewalk_width) / 2;
+        float offset = Mathf.Max(building_x_length / 2f - sidewalk_width, 0);
+        newSpecialRoof.transform.position = new Vector3(globalX - offset, height, globalZ);
+        newSpecialRoof.transform.localScale = 100f / 12f * new Vector3(true_width, true_width, true_width);
+        
+        newSpecialRoof = Instantiate(specialRoof);
+        newSpecialRoof.transform.position = new Vector3(globalX + offset, height, globalZ);
+        newSpecialRoof.transform.localRotation = Quaternion.Euler(0, 180, 0);
+        newSpecialRoof.transform.localScale = 100f / 12f * new Vector3(true_width, true_width, true_width);
+
+        if (2 * (building_x_length / 2f - sidewalk_width) > 0f) {
+            GameObject newRoof = Instantiate(roof);
+            newRoof.transform.position = new Vector3(globalX, height, globalZ);
+            newRoof.transform.localScale = 100f / 12f * new Vector3(2 * (building_x_length / 2f - sidewalk_width), true_width, true_width);
+        }
+    }
+
     public void GenerateLightPoles(int i, int j)
     {
         float globalX;
@@ -133,6 +165,8 @@ public class City_Generator : MonoBehaviour
                     else if (rv < p_flat_roof + p_sloped_roof)
                     {
                         GenerateRoofedBuilding(i, j);
+                    } else if (rv < p_flat_roof + p_sloped_roof + p_special_roof) {
+                        GenerateSpecialRoofedBuilding(i, j);
                     }
                 }
 

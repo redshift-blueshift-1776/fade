@@ -14,15 +14,17 @@ public class Streetlight : MonoBehaviour
 
     public int lastColorBeat = -1;
 
-    private Color emissionColor = new Color(191, 61, 0, 255);
+    private Color emissionColor;
+    Renderer targetRenderer;
 
+    private Coroutine currentFlashCoroutine;
     [SerializeField] public GameObject lightCube;
-    [SerializeField] public Color bright_color;
-    [SerializeField] public Color dark_color;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         nextChangeTime = BeatManager.Instance.GetNextBeatTime();
+        targetRenderer = lightCube.GetComponent<Renderer>();
+        emissionColor = targetRenderer.material.GetColor("_EmissionColor");
     }
 
     // Update is called once per frame
@@ -38,7 +40,12 @@ public class Streetlight : MonoBehaviour
             lastColorBeat = currentBeat;
             if (currentBeat % 4 == displacement) {
                 // Debug.Log("Flashing Color");
-                StartCoroutine(FlashColor());
+                if (currentFlashCoroutine != null)
+                {
+                    StopCoroutine(currentFlashCoroutine);
+                }
+
+                currentFlashCoroutine = StartCoroutine(FlashColor());
             }
         }
     }
@@ -46,16 +53,31 @@ public class Streetlight : MonoBehaviour
     public IEnumerator FlashColor() {
         float elapsed = 0f;
         float duration = 3 * (float)BeatManager.Instance.GetSecondsPerBeat();
-        Renderer targetRenderer = lightCube.GetComponent<Renderer>();
-        while (elapsed < duration) {
+        
+
+        float maxChannel = Mathf.Max(emissionColor.r, emissionColor.g, emissionColor.b);
+        Color normalizedColor = emissionColor / maxChannel;
+
+        Color.RGBToHSV(normalizedColor, out float h, out float s, out float v);
+
+        while (elapsed < duration)
+        {
             float t = elapsed / duration;
-            // lightCube.GetComponent<MeshRenderer>().material.color = Color.Lerp(bright_color, dark_color, t);
-            Material material = targetRenderer.material;
-            material.EnableKeyword("_EMISSION");
-            material.SetColor("_EmissionColor", Color.Lerp(emissionColor, Color.black, t));
+
+
+            float newIntensity = Mathf.Lerp(maxChannel, 0f, t);
+            Color newColor = Color.HSVToRGB(h, s, Mathf.Lerp(v, 0, t)) * newIntensity;
+
+            targetRenderer.material.EnableKeyword("_EMISSION");
+            targetRenderer.material.SetColor("_EmissionColor", newColor);
+            //material.SetColor("_BaseColor", Color.Lerp(baseColor, Color.black, t));
+            
+            //Debug.Log($"Intensity: {newIntensity}, Color: {newColor}");
+            
             elapsed += Time.deltaTime;
             yield return null;
         }
+        targetRenderer.material.SetColor("_EmissionColor", emissionColor);
         yield return null;
     }
 }

@@ -151,10 +151,6 @@ PrefabInstance:
       propertyPath: sliderY
       value: 
       objectReference: {fileID: 255221139}
-    - target: {fileID: 2482483506080275192, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: isGlobal
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4777624969639749158, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
       propertyPath: m_Name
       value: Player
@@ -198,10 +194,6 @@ PrefabInstance:
     - target: {fileID: 7200463188200083511, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8780542723322080175, guid: 62b3fd9b6d7fa42f0b29cfc28dc8f5c6, type: 3}
-      propertyPath: far clip plane
-      value: 200
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

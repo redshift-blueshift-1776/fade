@@ -43,7 +43,10 @@ public class GameManager : MonoBehaviour
         RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Flat;
         RenderSettings.ambientLight = Color.black;
         RenderSettings.ambientSkyColor = Color.black;
-        RenderSettings.ambientIntensity = 0.2f;
+        RenderSettings.ambientIntensity = 0f;
+        RenderSettings.reflectionIntensity = 0.2f;
+
+        DynamicGI.UpdateEnvironment(); 
     }
 
     public void handleEnergy() {

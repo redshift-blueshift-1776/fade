@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 using System.Threading;
+using UnityEngine.Rendering.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     private float minDistanceToLightpoleThreshold = 10f;
 
     private bool isInCutscene = false;
+    [SerializeField] private GameObject uiCanvas;
 
     [SerializeField] public int nextScene;
 
@@ -42,6 +44,8 @@ public class GameManager : MonoBehaviour
     {
         handleEnergy();
         updateEnergyDisplay();
+
+        uiCanvas.SetActive(!isInCutscene);
     }
 
     private void initializeEnvironment()

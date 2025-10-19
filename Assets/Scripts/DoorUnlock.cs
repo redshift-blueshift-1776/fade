@@ -85,8 +85,8 @@ public class DoorUnlock : MonoBehaviour
         yield return new WaitForSeconds(delay);
         gameManager.setIsInCutscene(true);
         RenderSettings.reflectionIntensity = 1.0f;
-        RenderSettings.ambientIntensity = 0.3f;
-        RenderSettings.ambientSkyColor = Color.white;
+        RenderSettings.ambientIntensity = 0f;
+        RenderSettings.ambientSkyColor = new Color(0.5f, 0.5f, 0.5f);
         mainCamera.GetComponent<AudioListener>().enabled = false;
         mainCamera.SetActive(false);
         altCamera.SetActive(true);

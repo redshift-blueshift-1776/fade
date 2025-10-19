@@ -59,6 +59,8 @@ public class City_Generator : MonoBehaviour
 
     [SerializeField] private bool placeRandomRooms = true;
 
+    private List<GameObject> keysAndCollectible = new List<GameObject>(); 
+
     private float[][] doorColors =
     {
         new float[] {1, 0, 0},
@@ -93,8 +95,6 @@ public class City_Generator : MonoBehaviour
         if (placeRandomRooms) {
             generateRooms();
         }
-        
-        //shuffle
         
         
     }
@@ -229,13 +229,12 @@ public class City_Generator : MonoBehaviour
         return newDoorRoom;
     }
     
-    public void GenerateCollectible(int i, int j)
+    public GameObject GenerateCollectible(int i, int j)
     {
         GameObject newCollectible = Instantiate(collectible);
-        float globalX = (i - (x_dimension - 1) / 2) * x_length;
-        float globalZ = (j - (z_dimension - 1) / 2) * z_length;
 
-        newCollectible.transform.position = new Vector3(globalX, 2.5f, globalZ);
+        newCollectible.transform.position = getGlobalCoordinates(i, 2.5f, j);
+        return newCollectible;
     }
 
     public void GenerateLightPoles(int i, int j)
@@ -295,21 +294,20 @@ public class City_Generator : MonoBehaviour
                 GameObject key = doorRoom.transform.Find("Key").gameObject;
 
                 key.transform.position = getGlobalCoordinates(prevKeyLocation[0], 3.5f, prevKeyLocation[1]);
-                
 
+                keysAndCollectible.Add(key);
                 prevKeyLocation = new int[] { i, j };
                 doorRoomsPlaced++;
             } else
             {
                 if (doorRoomsPlaced == numberOfDoorRooms)
                 {
-                    GenerateCollectible(prevKeyLocation[0], prevKeyLocation[1]);
+                    keysAndCollectible.Add(GenerateCollectible(prevKeyLocation[0], prevKeyLocation[1]));
                     doorRoomsPlaced++;
                 }
                 if (UnityEngine.Random.Range(0f, 1f) <= probabilityOfEmptyRoomSpawning)
                 {
                     GenerateEmptyRoom(i, j);
-                    Debug.Log("genered empty room!");
                 }
             }
         }
@@ -353,11 +351,16 @@ public class City_Generator : MonoBehaviour
     {
         return lightpoleGlobalPositions;
     }
-    
+
     private Vector3 getGlobalCoordinates(int i, float offsetY, int j)
     {
         float globalX = (i - (x_dimension - 1) / 2) * x_length;
         float globalZ = (j - (z_dimension - 1) / 2) * z_length;
         return new Vector3(globalX, offsetY, globalZ);
+    }
+    
+    public List<GameObject> getKeysAndCollectible()
+    {
+        return keysAndCollectible;
     }
 }

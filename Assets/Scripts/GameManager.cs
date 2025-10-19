@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
-using System;
 
 public class GameManager : MonoBehaviour
 {

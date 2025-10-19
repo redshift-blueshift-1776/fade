@@ -15,9 +15,11 @@ public class Collectible : MonoBehaviour
     private float clipLength;
     private GameObject player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Vector3 originalPosition;
 
     [SerializeField] private GameObject model;
     [SerializeField] private GameObject defaultModel;
+    
     void Start()
     {
         if (gameManager == null)
@@ -28,18 +30,13 @@ public class Collectible : MonoBehaviour
         {
             audioManager = FindAnyObjectByType<AudioManager>();
         }
+        originalPosition = transform.position;
         audioSource = GetComponent<AudioSource>();
         clipLength = audioSource.clip.length;
         player = GameObject.FindWithTag("Player");
         StartCoroutine(handleSound());
-
-        if (model != null)
-        {
-            defaultModel.GetComponent<MeshRenderer>().enabled = false;
-            GameObject instantiatedModel = Instantiate(model, transform);
-            instantiatedModel.transform.localPosition = Vector3.zero;
-            instantiatedModel.transform.localRotation = Quaternion.identity;
-        }
+        StartCoroutine(idle());
+        StartCoroutine(startCollectibleSpin());
     }
 
     // Update is called once per frame
@@ -79,6 +76,37 @@ public class Collectible : MonoBehaviour
             yield return null;
         }
     }
+
+    private const float verticalDisplacementAmplitude = 1f;
+    private const float verticalDisplacementPeriod = 2.0f;
+    private IEnumerator idle()
+    {
+        float positionTime = 0;
+        float rotateTime = 0;
+        while (true)
+        {
+            transform.position = originalPosition + new Vector3(
+                0,
+                verticalDisplacementAmplitude * Mathf.Sin(2 * Mathf.PI / verticalDisplacementPeriod * positionTime),
+                0
+            );
+
+            positionTime += Time.deltaTime;
+            rotateTime += Time.deltaTime;
+
+            yield return null;
+        }
+    }
+
+    private float rotatePeriod = 2f;
+    private IEnumerator startCollectibleSpin()
+    {
+        while (true)
+        {
+            transform.Rotate(0, 360 * Time.deltaTime / rotatePeriod, 0);
+            yield return null;
+        }
+    }
     
     public void setCollectibleModel(GameObject obj)
     {
@@ -88,5 +116,7 @@ public class Collectible : MonoBehaviour
         GameObject instantiatedModel = Instantiate(model, transform);
         instantiatedModel.transform.localPosition = Vector3.zero;
         instantiatedModel.transform.localRotation = Quaternion.identity;
+        instantiatedModel.name = "Model";
+        instantiatedModel.tag = "CollectibleModel";
     }
 }

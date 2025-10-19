@@ -118,6 +118,8 @@ public class GameSettings : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.M))
         {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             loadScene("Main Menu");
         } 
     }

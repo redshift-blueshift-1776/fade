@@ -635,6 +635,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7971344660125932026, guid: 550d22dee3f054b428331e7e40f6a1c5, type: 3}
+      propertyPath: m_Volume
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 8053997984012386279, guid: 550d22dee3f054b428331e7e40f6a1c5, type: 3}
       propertyPath: m_Name
       value: Collectible

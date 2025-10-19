@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 using UnityEngine.UI;
@@ -15,6 +16,9 @@ public class PlayerMovement : MonoBehaviour
 
     public Slider sliderX;
     public Slider sliderY;
+
+    public Slider fovSlider;
+    public TMP_Text fovText;
 
     private float yaw;
     private float pitch;
@@ -53,6 +57,9 @@ public class PlayerMovement : MonoBehaviour
             moveCamera();
         }
         handleSensitivityChange();
+
+        Camera.main.fieldOfView = Mathf.Clamp(30f, fovSlider.value, 120f);
+        fovText.text = Camera.main.fieldOfView.ToString();
     }
 
     void FixedUpdate()

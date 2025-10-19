@@ -1220,13 +1220,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   images:
-  - {fileID: 2800000, guid: 2867868cb23564b729a35fba124f1e11, type: 3}
-  - {fileID: 2800000, guid: 776b86528a60e424691ba5ece9262996, type: 3}
-  - {fileID: 2800000, guid: 46e5e7b7452cb413297a3af35c8517a4, type: 3}
-  - {fileID: 2800000, guid: 776b86528a60e424691ba5ece9262996, type: 3}
+  - {fileID: 2800000, guid: 8206e4956dbcc45639279c4cb8bbfd08, type: 3}
+  - {fileID: 2800000, guid: e6c815c44af914466a6ddd054b051d1d, type: 3}
+  - {fileID: 2800000, guid: 3bf504949f0c34a5b9a564a26e964979, type: 3}
+  - {fileID: 2800000, guid: 7e1f49925cc0a49129f2e30d69f7e387, type: 3}
   - {fileID: 2800000, guid: 916ca4b35730546ca829c247996341ad, type: 3}
-  - {fileID: 2800000, guid: 916ca4b35730546ca829c247996341ad, type: 3}
-  durations: 1e000000320000001e0000001e0000000a00000001000000
+  durations: 3c0000003c0000003c0000003c00000001000000
   nextSceneNumber: 4
   imageDisplay: {fileID: 1364635907}
   canvas: {fileID: 2009130109}

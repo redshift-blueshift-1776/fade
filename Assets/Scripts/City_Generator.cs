@@ -73,6 +73,7 @@ public class City_Generator : MonoBehaviour
         {
             doorColors = doorColors.OrderBy(x => UnityEngine.Random.value).ToArray();
         }
+
         buildingLocations = new HashSet<int>();
         lightpoleGlobalPositions = new HashSet<float[]>();
         if (useHardcodedLocations)
@@ -275,7 +276,7 @@ public class City_Generator : MonoBehaviour
 
                 GameObject key = doorRoom.transform.Find("Key").gameObject;
 
-                key.transform.position = getGlobalCoordinates(prevKeyLocation[0], 2.5f, prevKeyLocation[1]);
+                key.transform.position = getGlobalCoordinates(prevKeyLocation[0], 3.5f, prevKeyLocation[1]);
                 
 
                 prevKeyLocation = new int[] { i, j };

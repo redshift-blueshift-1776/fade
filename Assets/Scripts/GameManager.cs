@@ -169,7 +169,6 @@ public class GameManager : MonoBehaviour
 
         while (true)
         {
-            Debug.Log(t);
             if (script.isDestinationCollected() && !waitingToShowNext && stack.Count > 0)
             {
                 waitingToShowNext = true;

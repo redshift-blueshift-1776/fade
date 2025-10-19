@@ -87,8 +87,10 @@ public class DoorUnlock : MonoBehaviour
         RenderSettings.reflectionIntensity = 1.0f;
         RenderSettings.ambientIntensity = 0.3f;
         RenderSettings.ambientSkyColor = Color.white;
+        mainCamera.GetComponent<AudioListener>().enabled = false;
         mainCamera.SetActive(false);
         altCamera.SetActive(true);
+        altCamera.GetComponent<AudioListener>().enabled = true;
         float duration = 3f;
         float elapsed = 0f;
         Vector3 startPos = door.transform.position;
@@ -101,6 +103,8 @@ public class DoorUnlock : MonoBehaviour
         }
         door.transform.position = targetPos;
         mainCamera.SetActive(true);
+        mainCamera.GetComponent<AudioListener>().enabled = true;
+        altCamera.GetComponent<AudioListener>().enabled = false;
         altCamera.SetActive(false);
         RenderSettings.reflectionIntensity = targetReflectionIntensity;
         RenderSettings.ambientIntensity = 0;

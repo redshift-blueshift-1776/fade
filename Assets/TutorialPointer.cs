@@ -1,4 +1,5 @@
 using System.Reflection;
+using UnityEditor.UI;
 using UnityEngine;
 
 public class Level1Tutorial : MonoBehaviour
@@ -14,7 +15,11 @@ public class Level1Tutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!destination.activeInHierarchy)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
         Vector3 midpoint = getMidpoint();
         float distance = getDistance();
         Vector3 direction = getDirection();

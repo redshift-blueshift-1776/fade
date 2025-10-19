@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +23,8 @@ public class GameManager : MonoBehaviour
     private float minDistanceToLightpoleThreshold = 10f;
 
     private bool isInCutscene = false;
+
+    [SerializeField] public int nextScene;
 
     void Start()
     {
@@ -126,5 +130,11 @@ public class GameManager : MonoBehaviour
     public void collectedCollectible()
     {
         Debug.Log("collected collectible!");
+        StartCoroutine(toNextScene());
+    }
+
+    public IEnumerator toNextScene() {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(nextScene);
     }
 }

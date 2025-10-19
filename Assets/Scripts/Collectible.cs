@@ -1,4 +1,8 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System;
 
 public class Collectible : MonoBehaviour
 {
@@ -20,9 +24,12 @@ public class Collectible : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Collected");
             gameManager.collectedCollectible();
             gameObject.SetActive(false);
             audioManager.playSound("pickupCollectible");
         }
     }
+    
+    
 }

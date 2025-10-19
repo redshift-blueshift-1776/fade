@@ -44,4 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14c7550adf664d169af92f3b8d37b15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds: []
+  sounds:
+  - name: pickupCollectible
+    clip: {fileID: 8300000, guid: 00821f82ec95142d2909ea17545097dd, type: 3}

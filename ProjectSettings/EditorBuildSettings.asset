@@ -71,5 +71,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cutscenes/Cutscene 9.unity
     guid: bfbff68d2f40e43ef8f66a01986b9187
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Cutscene 2 Real.unity
+    guid: 29e2d0cd2980d4c94ae4179e99477b5a
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

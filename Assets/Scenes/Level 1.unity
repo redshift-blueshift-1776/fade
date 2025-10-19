@@ -1186,7 +1186,7 @@ PrefabInstance:
       objectReference: {fileID: 240051364}
     - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
       propertyPath: nextScene
-      value: 12
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
       propertyPath: cityGenerator

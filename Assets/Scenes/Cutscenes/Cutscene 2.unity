@@ -1220,14 +1220,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   images:
-  - {fileID: 2800000, guid: 2867868cb23564b729a35fba124f1e11, type: 3}
-  - {fileID: 2800000, guid: 776b86528a60e424691ba5ece9262996, type: 3}
-  - {fileID: 2800000, guid: 46e5e7b7452cb413297a3af35c8517a4, type: 3}
-  - {fileID: 2800000, guid: 776b86528a60e424691ba5ece9262996, type: 3}
-  - {fileID: 2800000, guid: 46e5e7b7452cb413297a3af35c8517a4, type: 3}
-  - {fileID: 2800000, guid: 2867868cb23564b729a35fba124f1e11, type: 3}
-  durations: 0a0000001e0000001e000000140000000a00000001000000
-  nextSceneNumber: 2
+  - {fileID: 2800000, guid: deb84eb5ae7004fdc90f77194bb4afc3, type: 3}
+  - {fileID: 2800000, guid: c7844c0f166eb4cc58058169022b0d91, type: 3}
+  - {fileID: 2800000, guid: 1c603bfa93f3744fab7bb2e90b034683, type: 3}
+  - {fileID: 2800000, guid: a3711a0e3547f462b85a537484153650, type: 3}
+  - {fileID: 2800000, guid: deb84eb5ae7004fdc90f77194bb4afc3, type: 3}
+  - {fileID: 2800000, guid: 916ca4b35730546ca829c247996341ad, type: 3}
+  durations: 140000001e0000001e0000001e0000000a00000001000000
+  nextSceneNumber: 1
   imageDisplay: {fileID: 1364635907}
   canvas: {fileID: 2009130109}
   animationProgressBarFill: {fileID: 1696394519}
@@ -1267,8 +1267,8 @@ Camera:
   m_GameObject: {fileID: 1736544834}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

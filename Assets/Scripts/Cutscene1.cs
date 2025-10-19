@@ -82,6 +82,6 @@ public class Cutscene1 : MonoBehaviour
             yield return StartCoroutine(DoLine(line));
         }
         
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(12);
     }
 }

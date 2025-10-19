@@ -955,6 +955,18 @@ PrefabInstance:
       propertyPath: p_sloped_roof
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
+      propertyPath: placeRandomRooms
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
+      propertyPath: shuffleDoorColors
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
+      propertyPath: percentAutomaticLocations
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3265005168632594359, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
       propertyPath: m_Name
       value: CityGenerator

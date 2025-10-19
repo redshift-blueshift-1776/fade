@@ -57,6 +57,8 @@ public class City_Generator : MonoBehaviour
 
     [SerializeField] private bool shuffleDoorColors = false;
 
+    [SerializeField] private bool placeRandomRooms = true;
+
     private float[][] doorColors =
     {
         new float[] {1, 0, 0},
@@ -88,7 +90,10 @@ public class City_Generator : MonoBehaviour
         GenerateCity();
 
         //empty and special rooms
-        generateRooms();
+        if (placeRandomRooms) {
+            generateRooms();
+        }
+        
         //shuffle
         
         

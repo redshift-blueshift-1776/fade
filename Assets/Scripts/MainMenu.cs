@@ -20,7 +20,10 @@ public class MainMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKey(KeyCode.L) && Input.GetKey(KeyCode.C))
+        {
+            SceneManager.LoadScene(21);
+        } 
     }
 
     public IEnumerator DoTextStuff() {

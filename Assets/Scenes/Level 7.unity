@@ -3102,11 +3102,11 @@ PrefabInstance:
       objectReference: {fileID: 1778032696145252707, guid: e3ebbba06f3d548b2becece3b95d8855, type: 3}
     - target: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
       propertyPath: x_dimension
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
       propertyPath: z_dimension
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
       propertyPath: p_sloped_roof
@@ -3170,11 +3170,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
       propertyPath: percentAutomaticLocations
-      value: 0.4
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
       propertyPath: probabilityOfEmptyRoomSpawning
-      value: 0.4
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 3265005168632594359, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
       propertyPath: m_Name

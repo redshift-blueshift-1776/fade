@@ -1193,6 +1193,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1662907210}
     - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
+      propertyPath: timeUntilHelp
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
       propertyPath: energyBarSlider
       value: 
       objectReference: {fileID: 1541999810}

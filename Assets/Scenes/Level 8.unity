@@ -1401,7 +1401,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: b65f20dcf6d1644a2ad516e8180ad57a, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.15
   m_Pitch: 0.9
   Loop: 1
   Mute: 0
@@ -1689,7 +1689,7 @@ PrefabInstance:
       objectReference: {fileID: 797665533}
     - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
       propertyPath: timeUntilHelp
-      value: 120
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
       propertyPath: energyBarSlider

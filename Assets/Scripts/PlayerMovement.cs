@@ -45,8 +45,32 @@ public class PlayerMovement : MonoBehaviour
             yaw -= Mathf.Sign(yaw) * 360f;
         }
 
-        sensitivityX = sliderX.value;
-        sensitivityY = sliderY.value;
+        handlePlayerPrefs();
+    }
+
+    private void handlePlayerPrefs()
+    {
+        if (!PlayerPrefs.HasKey("sensX"))
+        {
+            PlayerPrefs.SetFloat("sensX", 2.5f);
+        }
+        if (!PlayerPrefs.HasKey("sensY"))
+        {
+            PlayerPrefs.SetFloat("sensY", 2f);
+        }
+
+        sensitivityX = PlayerPrefs.GetFloat("sensX");
+        sensitivityY = PlayerPrefs.GetFloat("sensY");
+
+        sliderX.value = sensitivityX;
+        sliderY.value = sensitivityY;
+
+
+        if (!PlayerPrefs.HasKey("fov"))
+        {
+            PlayerPrefs.SetInt("fov", 60);
+        }
+        fovSlider.value = PlayerPrefs.GetInt("fov");
     }
 
     // Update is called once per frame
@@ -62,8 +86,10 @@ public class PlayerMovement : MonoBehaviour
         {
             Camera.main.fieldOfView = Mathf.Clamp(30f, fovSlider.value, 120f);
             fovText.text = Camera.main.fieldOfView.ToString();
+            PlayerPrefs.SetInt("fov", (int)fovSlider.value);
         }
     }
+
 
     void FixedUpdate()
     {

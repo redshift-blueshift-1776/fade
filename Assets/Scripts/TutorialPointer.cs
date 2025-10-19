@@ -2,7 +2,7 @@ using System.Reflection;
 using UnityEditor.UI;
 using UnityEngine;
 
-public class Level1Tutorial : MonoBehaviour
+public class TutorialPointer : MonoBehaviour
 {
     private GameObject player;
     [SerializeField] private GameObject destination;
@@ -15,9 +15,14 @@ public class Level1Tutorial : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (destination == null)
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            return;
+        }
         if (!destination.activeInHierarchy)
         {
-            gameObject.SetActive(false);
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
             return;
         }
         Vector3 midpoint = getMidpoint();
@@ -29,6 +34,12 @@ public class Level1Tutorial : MonoBehaviour
         transform.localScale = new Vector3(0.25f, 0.1f, distance + 0.1f);
     }
 
+    public void setDestination(GameObject gameObject)
+    {
+        destination = gameObject;
+        GetComponent<MeshRenderer>().enabled = true;
+    }
+
     private Vector3 getMidpoint()
     {
         return (player.transform.position + destination.transform.position) / 2;
@@ -38,9 +49,14 @@ public class Level1Tutorial : MonoBehaviour
     {
         return (player.transform.position - destination.transform.position).magnitude;
     }
-    
+
     private Vector3 getDirection()
     {
         return destination.transform.position - player.transform.position;
+    }
+    
+    public bool isDestinationCollected()
+    {
+        return destination == null || !destination.activeInHierarchy;
     }
 }

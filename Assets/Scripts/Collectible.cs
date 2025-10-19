@@ -16,6 +16,14 @@ public class Collectible : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (gameManager == null)
+        {
+            gameManager = FindAnyObjectByType<GameManager>();
+        }
+        if (audioManager == null)
+        {
+            audioManager = FindAnyObjectByType<AudioManager>();
+        }
         audioSource = GetComponent<AudioSource>();
         clipLength = audioSource.clip.length;
         player = GameObject.FindWithTag("Player");

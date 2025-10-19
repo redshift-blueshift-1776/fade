@@ -879,7 +879,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: b65f20dcf6d1644a2ad516e8180ad57a, type: 3}
+  m_Resource: {fileID: 8300000, guid: a4aa74ad38ae04beea0e72f29ccc8722, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1246,6 +1246,10 @@ PrefabInstance:
     - target: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
       propertyPath: p_special_roof
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
+      propertyPath: placeRandomRooms
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
       propertyPath: hardcoded.Array.size

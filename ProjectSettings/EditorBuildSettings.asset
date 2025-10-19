@@ -65,5 +65,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Cutscenes/Eaten Cutscene.unity
     guid: 6b5f099cca0dd4ca88e8bc9be4bb8819
+  - enabled: 1
+    path: Assets/Scenes/Cutscenes/Ending Cutscene and Credits.unity
+    guid: d9c950f45be6a4bfc9a8d9df9b55d7c4
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

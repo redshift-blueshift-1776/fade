@@ -7,6 +7,7 @@ using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
 using System.Linq;
+using NUnit.Framework;
 
 public class City_Generator : MonoBehaviour
 {
@@ -47,9 +48,18 @@ public class City_Generator : MonoBehaviour
 
     private HashSet<float[]> lightpoleGlobalPositions;
 
-    public HashSet<int> hardcodedLocations;
+    public HashSet<int> buildingLocations;
 
     private Stack<int[]> doorRoomLocations;
+
+    [SerializeField] private bool useHardcodedLocations = true;
+    [SerializeField] private float percentAutomaticLocations = 1f;
+
+    [SerializeField] private bool shuffleDoorColors = false;
+
+    [SerializeField] private bool placeRandomRooms = true;
+
+    private List<GameObject> keysAndCollectible = new List<GameObject>(); 
 
     private float[][] doorColors =
     {
@@ -63,31 +73,69 @@ public class City_Generator : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ParseHardcoded();
+        if (shuffleDoorColors)
+        {
+            doorColors = doorColors.OrderBy(x => UnityEngine.Random.value).ToArray();
+        }
+
+        buildingLocations = new HashSet<int>();
+        lightpoleGlobalPositions = new HashSet<float[]>();
+        if (useHardcodedLocations)
+        {
+            ParseHardcoded();
+        }
+        else
+        {
+            generateAutomaticLocations();
+        }
+        
         GenerateCity();
 
         //empty and special rooms
-        generateRooms();
-        //shuffle
-        doorColors = doorColors.OrderBy(x => UnityEngine.Random.value).ToArray();
+        if (placeRandomRooms) {
+            generateRooms();
+        }
+        
         
     }
 
     public void ParseHardcoded() {
-        hardcodedLocations = new HashSet<int>();
-        lightpoleGlobalPositions = new HashSet<float[]>();
         foreach (string s in hardcoded) {
             string[] parts = s.Split(',');
             int x_val = int.Parse(parts[0]);
             int z_val = int.Parse(parts[1]);
-            hardcodedLocations.Add(z_dimension * x_val + z_val);
+            buildingLocations.Add(z_dimension * x_val + z_val);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+
+    }
+    
+    private void generateAutomaticLocations()
+    {
+        int totalLocations = x_dimension * z_dimension;
+        int emptyLocations = (int)Mathf.Ceil(percentAutomaticLocations * totalLocations);
+
+        HashSet<int[]> locationCoordinates = new HashSet<int[]>();
+        for (int i = 0; i < x_dimension; i++)
+        {
+            for (int j = 0; j < z_dimension; j++)
+            {
+                locationCoordinates.Add(new int[] { i, j });
+            }
+        }
+
+        int[][] shuffledLocations = locationCoordinates.OrderBy(x => UnityEngine.Random.value).ToArray();
         
+        for (int k = 0; k < Mathf.Min(shuffledLocations.Length, emptyLocations); k++)
+        {
+            int i = shuffledLocations[k][0];
+            int j = shuffledLocations[k][1];
+            buildingLocations.Add(z_dimension * i + j);
+        }
     }
 
     public void GenerateBuilding(int i, int j) {
@@ -127,28 +175,43 @@ public class City_Generator : MonoBehaviour
         newBuilding.transform.localScale = new Vector3(building_x_length, (float)height, building_z_length);
 
         GameObject newSpecialRoof = Instantiate(specialRoof);
-        float true_width = (building_z_length + sidewalk_width) / 2;
-        float offset = Mathf.Max(building_x_length / 2f - sidewalk_width, 0);
-        newSpecialRoof.transform.position = new Vector3(globalX - offset, height, globalZ);
-        newSpecialRoof.transform.localScale = 100f / 12f * new Vector3(true_width, true_width, true_width);
+        float true_width = (Mathf.Min(building_x_length, building_z_length) + sidewalk_width) / 2;
+        float offset = Mathf.Max(Mathf.Abs(building_x_length - building_z_length) / 2, 0);
+        Vector3 roofPos1 = new Vector3(
+            globalX - (building_x_length >= building_z_length ? 1 : 0) * offset,
+            height,
+            globalZ
+            );
+        Vector3 roofPos2 = new Vector3(
+            globalX + (building_x_length >= building_z_length ? 1 : 0) * offset,
+            height,
+            globalZ
+            );
+        newSpecialRoof.transform.position = roofPos1;
+        newSpecialRoof.transform.localScale = 100f / 12f * new Vector3(true_width, true_width, (building_z_length + sidewalk_width) / 2);
 
         newSpecialRoof = Instantiate(specialRoof);
-        newSpecialRoof.transform.position = new Vector3(globalX + offset, height, globalZ);
+        newSpecialRoof.transform.position = roofPos2;
         newSpecialRoof.transform.localRotation = Quaternion.Euler(0, 180, 0);
-        newSpecialRoof.transform.localScale = 100f / 12f * new Vector3(true_width, true_width, true_width);
+        newSpecialRoof.transform.localScale = 100f / 12f * new Vector3(true_width, true_width, (building_z_length + sidewalk_width) / 2);
 
-        if (2 * (building_x_length / 2f - sidewalk_width) > 0f) {
+        if (2 * (building_x_length / 2f - sidewalk_width) > 0f)
+        {
             GameObject newRoof = Instantiate(roof);
             newRoof.transform.position = new Vector3(globalX, height, globalZ);
-            newRoof.transform.localScale = 100f / 12f * new Vector3(2 * (building_x_length / 2f - sidewalk_width), true_width, true_width);
+            newRoof.transform.localScale = 100f / 12f * new Vector3(
+                Mathf.Max(building_x_length - building_z_length, 0),
+                true_width,
+                (building_z_length + sidewalk_width) / 2);
         }
     }
-
     public void GenerateEmptyRoom(int i, int j)
     {
         GameObject newEmptyRoom = Instantiate(emptyRoom);
 
         newEmptyRoom.transform.position = getGlobalCoordinates(i, 0, j);
+
+        newEmptyRoom.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0f, 360f), 0);
     }
 
     public GameObject GenerateDoorRoom(int i, int j, Color c)
@@ -158,6 +221,7 @@ public class City_Generator : MonoBehaviour
         float globalZ = (j - (z_dimension - 1) / 2) * z_length;
 
         newDoorRoom.transform.position = new Vector3(globalX, 0, globalZ);
+        newDoorRoom.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0f, 360f), 0);
 
         DoorUnlock script = newDoorRoom.GetComponent<DoorUnlock>();
         script.setColor(c);
@@ -165,13 +229,12 @@ public class City_Generator : MonoBehaviour
         return newDoorRoom;
     }
     
-    public void GenerateCollectible(int i, int j)
+    public GameObject GenerateCollectible(int i, int j)
     {
         GameObject newCollectible = Instantiate(collectible);
-        float globalX = (i - (x_dimension - 1) / 2) * x_length;
-        float globalZ = (j - (z_dimension - 1) / 2) * z_length;
 
-        newCollectible.transform.position = new Vector3(globalX, 2.5f, globalZ);
+        newCollectible.transform.position = getGlobalCoordinates(i, 2.5f, j);
+        return newCollectible;
     }
 
     public void GenerateLightPoles(int i, int j)
@@ -204,8 +267,7 @@ public class City_Generator : MonoBehaviour
 
     private void generateRooms()
     {
-        Debug.Log("generating rooms!");
-        int[] randomizedHardcodedLocations = hardcodedLocations.OrderBy(x => UnityEngine.Random.value).ToArray();
+        int[] randomizedHardcodedLocations = buildingLocations.OrderBy(x => UnityEngine.Random.value).ToArray();
         doorRoomLocations = new Stack<int[]>();
 
         int[] prevKeyLocation = null;
@@ -228,27 +290,24 @@ public class City_Generator : MonoBehaviour
                 float[] vectorColor = doorColors[doorRoomsPlaced];
                 Color c = new Color(vectorColor[0], vectorColor[1], vectorColor[2]);
                 GameObject doorRoom = GenerateDoorRoom(i, j, c);
-                Debug.Log("generated door room " + doorRoomsPlaced + " at " + i + ", " + j);
 
                 GameObject key = doorRoom.transform.Find("Key").gameObject;
 
-                key.transform.position = getGlobalCoordinates(prevKeyLocation[0], 2.5f, prevKeyLocation[1]);
-                Debug.Log("placed key!");
-                
+                key.transform.position = getGlobalCoordinates(prevKeyLocation[0], 3.5f, prevKeyLocation[1]);
 
+                keysAndCollectible.Add(key);
                 prevKeyLocation = new int[] { i, j };
                 doorRoomsPlaced++;
             } else
             {
                 if (doorRoomsPlaced == numberOfDoorRooms)
                 {
-                    GenerateCollectible(prevKeyLocation[0], prevKeyLocation[1]);
+                    keysAndCollectible.Add(GenerateCollectible(prevKeyLocation[0], prevKeyLocation[1]));
                     doorRoomsPlaced++;
                 }
                 if (UnityEngine.Random.Range(0f, 1f) <= probabilityOfEmptyRoomSpawning)
                 {
                     GenerateEmptyRoom(i, j);
-                    Debug.Log("genered empty room!");
                 }
             }
         }
@@ -260,7 +319,7 @@ public class City_Generator : MonoBehaviour
         {
             for (int j = 0; j < z_dimension; j++)
             {
-                if (!hardcodedLocations.Contains(z_dimension * i + j))
+                if (!buildingLocations.Contains(z_dimension * i + j))
                 {
                     float rv = UnityEngine.Random.Range(0f, 1f);
                     if (rv < p_flat_roof)
@@ -292,11 +351,16 @@ public class City_Generator : MonoBehaviour
     {
         return lightpoleGlobalPositions;
     }
-    
+
     private Vector3 getGlobalCoordinates(int i, float offsetY, int j)
     {
         float globalX = (i - (x_dimension - 1) / 2) * x_length;
         float globalZ = (j - (z_dimension - 1) / 2) * z_length;
         return new Vector3(globalX, offsetY, globalZ);
+    }
+    
+    public List<GameObject> getKeysAndCollectible()
+    {
+        return keysAndCollectible;
     }
 }

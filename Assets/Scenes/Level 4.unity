@@ -444,7 +444,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8067129835687233402, guid: 803dae597c81b43ec9661693f9c52d57, type: 3}
       propertyPath: doorColor.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8067129835687233402, guid: 803dae597c81b43ec9661693f9c52d57, type: 3}
       propertyPath: doorColor.r
@@ -1056,6 +1056,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 295947967}
     - target: {fileID: 8067129835687233402, guid: 803dae597c81b43ec9661693f9c52d57, type: 3}
+      propertyPath: doorColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067129835687233402, guid: 803dae597c81b43ec9661693f9c52d57, type: 3}
+      propertyPath: doorColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067129835687233402, guid: 803dae597c81b43ec9661693f9c52d57, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1748425642}
@@ -1205,10 +1213,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: b65f20dcf6d1644a2ad516e8180ad57a, type: 3}
+  m_Resource: {fileID: 8300000, guid: d0ccf2250622d4eab9d1a91f999a051d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 0.9
+  m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -1587,6 +1595,10 @@ PrefabInstance:
     - target: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
       propertyPath: p_special_roof
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
+      propertyPath: placeRandomRooms
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}
       propertyPath: hardcoded.Array.size

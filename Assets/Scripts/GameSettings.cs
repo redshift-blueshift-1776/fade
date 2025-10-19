@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameSettings : MonoBehaviour
 {
@@ -22,7 +23,8 @@ public class GameSettings : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
+        handleEmergencyExit();
         if (gameEnded)
         {
             settingStack.Clear();
@@ -110,5 +112,23 @@ public class GameSettings : MonoBehaviour
     public void addPage(string page)
     {
         settingStack.Push(page);
+    }
+
+    private void handleEmergencyExit()
+    {
+        if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.M))
+        {
+            loadScene("Main Menu");
+        } 
+    }
+
+    public void loadScene(string name)
+    {
+        SceneManager.LoadSceneAsync(name);
+    }
+
+    public void loadScene(int index)
+    {
+        SceneManager.LoadSceneAsync(index);
     }
 }

@@ -7,13 +7,20 @@ public class Key : MonoBehaviour
     [SerializeField] private DoorUnlock doorUnlockScript;
 
     private Vector3 originalPosition;
+    private AudioSource audioSource;
+    private float clipLength;
 
+    private GameObject player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         originalPosition = transform.position;
+        audioSource = GetComponent<AudioSource>();
+        clipLength = audioSource.clip.length;
 
+        player = GameObject.FindWithTag("Player");
         StartCoroutine(idle());
+        StartCoroutine(handleSound());
     }
 
     // Update is called once per frame
@@ -28,8 +35,8 @@ public class Key : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             doorUnlockScript.unlockDoor();
-            gameObject.SetActive(false);
             StopAllCoroutines();
+            gameObject.SetActive(false);
         }
     }
     
@@ -41,7 +48,6 @@ public class Key : MonoBehaviour
     {
         float positionTime = 0;
         float rotateTime = 0;
-        float pulseTime = 0;
         while (true)
         {
             transform.position = originalPosition + new Vector3(
@@ -58,11 +64,11 @@ public class Key : MonoBehaviour
 
             positionTime += Time.deltaTime;
             rotateTime += Time.deltaTime;
-            pulseTime += Time.deltaTime;
+
             yield return null;
         }
     }
-    
+
     private IEnumerator rotate()
     {
         float t = 0;
@@ -77,5 +83,26 @@ public class Key : MonoBehaviour
             yield return null;
         }
         yield return null;
+    }
+    
+    private IEnumerator handleSound()
+    {
+        float t = 0;
+        float cooldownTimer;
+
+        while (true)
+        {
+            float distance = (player.transform.position - transform.position).magnitude;
+            cooldownTimer = Mathf.Clamp(0.025f * distance, clipLength, 5f);
+            if (t < cooldownTimer)
+            {
+                t += Time.deltaTime;
+            } else
+            {
+                audioSource.Play();
+                t = 0;
+            }
+            yield return null;
+        }
     }
 }

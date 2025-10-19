@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f99edab31db74b029a1f3a3ba722b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  menuOrLevelSelect: 0
   x_dimension: 5
   z_dimension: 5
   x_length: 50
@@ -55,8 +57,17 @@ MonoBehaviour:
   building: {fileID: 3296738085193435695, guid: 9e71300de37a44a94b295c31e7d28fee, type: 3}
   lightpole: {fileID: 3974292775404431938, guid: fa7e17297f252477bb06437d7182e8c7, type: 3}
   roof: {fileID: 1873584682203476600, guid: 918e9fac28d2d4477bf7f08c05a66b0f, type: 3}
+  specialRoof: {fileID: 1778032696145252707, guid: e3ebbba06f3d548b2becece3b95d8855, type: 3}
+  emptyRoom: {fileID: 6525916933781347506, guid: aaf23ad9b8d6e48c1bfb44387df2b941, type: 3}
+  doorRoom: {fileID: 8152013735534039212, guid: 803dae597c81b43ec9661693f9c52d57, type: 3}
+  collectible: {fileID: 8053997984012386279, guid: 550d22dee3f054b428331e7e40f6a1c5, type: 3}
   hardcoded:
   - 2,2
   p_flat_roof: 0
   p_sloped_roof: 0
   p_special_roof: 0
+  probabilityOfEmptyRoomSpawning: 0
+  numberOfDoorRooms: 0
+  useHardcodedLocations: 1
+  percentAutomaticLocations: 1
+  shuffleDoorColors: 0

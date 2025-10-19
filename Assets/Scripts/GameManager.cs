@@ -1,11 +1,9 @@
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
-using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -130,14 +128,15 @@ public class GameManager : MonoBehaviour
     
     public void collectedCollectible()
     {
-        Debug.Log("collected collectible!");
         StartCoroutine(toNextScene());
     }
 
     public IEnumerator toNextScene() {
+        isInCutscene = true;
         yield return new WaitForSeconds(2f);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        isInCutscene = false;
         SceneManager.LoadScene(nextScene);
     }
 }

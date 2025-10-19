@@ -19,12 +19,22 @@ public class DoorUnlock : MonoBehaviour
     private float targetReflectionIntensity;
     private Color targetAmbientColor;
 
-    [SerializeField] private Color doorColor;
+    public Color doorColor;
 
     private Material doorMaterial;
 
     void Start()
     {
+        if (gameManager == null)
+        {
+            gameManager = FindObjectOfType<GameManager>();
+        }
+        if (mainCamera == null)
+        {
+            mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+        }
+
+        
         mainCamera.SetActive(true);
         altCamera.SetActive(false);
 
@@ -34,11 +44,15 @@ public class DoorUnlock : MonoBehaviour
         doorMaterial = door.GetComponent<MeshRenderer>().material;
 
         // Iterate through each immediate child Transform
-        updateColor();
     }
 
     private void updateColor()
     {
+        if (doorMaterial == null)
+        {
+            doorMaterial = door.GetComponent<MeshRenderer>().material;
+        }
+    
         foreach (Transform block in key.transform)
         {
             // Add the child's GameObject to the list
@@ -50,6 +64,9 @@ public class DoorUnlock : MonoBehaviour
         }
 
         doorMaterial.color = doorColor;
+        doorMaterial.SetColor("_Color", doorColor);
+        doorMaterial.EnableKeyword("_EMISSION");
+        doorMaterial.SetColor("_EmissionColor", doorColor);
     }
 
     // Update is called once per frame

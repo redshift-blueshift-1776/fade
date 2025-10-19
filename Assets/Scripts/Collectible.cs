@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 using UnityEngine.XR;
+using UnityEditor;
 
 public class Collectible : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class Collectible : MonoBehaviour
     private float clipLength;
     private GameObject player;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    [SerializeField] private GameObject model;
     void Start()
     {
         if (gameManager == null)

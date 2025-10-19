@@ -1,5 +1,3 @@
-using System.Reflection;
-using UnityEditor.UI;
 using UnityEngine;
 
 public class TutorialPointer : MonoBehaviour

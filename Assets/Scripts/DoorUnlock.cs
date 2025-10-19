@@ -44,6 +44,7 @@ public class DoorUnlock : MonoBehaviour
         doorMaterial = door.GetComponent<MeshRenderer>().material;
 
         // Iterate through each immediate child Transform
+        updateColor();
     }
 
     private void updateColor()

@@ -124,6 +124,8 @@ public class GameManager : MonoBehaviour
 
     private void killPlayer()
     {
+        Scene currentScene = SceneManager.GetActiveScene();
+        PlayerPrefs.SetInt("PreviousLevel", currentScene.buildIndex);
         SceneManager.LoadScene(19);
     }
 

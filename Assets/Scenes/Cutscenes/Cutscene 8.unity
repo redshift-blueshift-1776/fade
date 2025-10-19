@@ -1098,7 +1098,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 46e5e7b7452cb413297a3af35c8517a4, type: 3}
   - {fileID: 2800000, guid: 2867868cb23564b729a35fba124f1e11, type: 3}
   durations: 0a0000001e0000001e000000140000000a00000001000000
-  nextSceneNumber: 1
+  nextSceneNumber: 8
   imageDisplay: {fileID: 1364635907}
   canvas: {fileID: 2009130109}
   animationProgressBarFill: {fileID: 1696394519}

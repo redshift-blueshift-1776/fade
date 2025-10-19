@@ -33,7 +33,7 @@ public class GameSettings : MonoBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (!inSettings)
             {

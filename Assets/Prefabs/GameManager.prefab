@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8800410216326768645}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,10 +45,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cityGenerator: {fileID: 0}
+  tutorialPointer: {fileID: 3440728365419528257, guid: ed9bf730a2a404064a8c138ba32e502a, type: 3}
   player: {fileID: 0}
   energyBarSlider: {fileID: 0}
   energyBarSymbol: {fileID: 0}
   energyNumberText: {fileID: 0}
   energyBarFill: {fileID: 0}
-  energy: 100
-  distanceThreshold: 10
+  willHelpPlayer: 1
+  nextScene: 20
+  timeUntilHelp: 120

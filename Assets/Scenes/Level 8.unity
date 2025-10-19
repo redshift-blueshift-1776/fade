@@ -1635,10 +1635,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
-    - target: {fileID: 463877299684870009, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
-      propertyPath: m_TagString
-      value: GameManager
-      objectReference: {fileID: 0}
     - target: {fileID: 1078723305260225423, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -112.229385
@@ -1684,10 +1680,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 295947966}
     - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
-      propertyPath: nextScene
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
       propertyPath: cityGenerator
       value: 
       objectReference: {fileID: 1866327563}
@@ -1695,14 +1687,6 @@ PrefabInstance:
       propertyPath: energyBarFill
       value: 
       objectReference: {fileID: 797665533}
-    - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
-      propertyPath: timeUntilHelp
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
-      propertyPath: willHelpPlayer
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
       propertyPath: energyBarSlider
       value: 
@@ -1712,17 +1696,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 797665535}
     - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
-      propertyPath: tutorialPointer
-      value: 
-      objectReference: {fileID: 3440728365419528257, guid: ed9bf730a2a404064a8c138ba32e502a, type: 3}
-    - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
       propertyPath: energyNumberText
       value: 
       objectReference: {fileID: 797665534}
-    - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
-      propertyPath: energyLossPerSecond
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GameSettings : MonoBehaviour
 {
@@ -110,5 +111,15 @@ public class GameSettings : MonoBehaviour
     public void addPage(string page)
     {
         settingStack.Push(page);
+    }
+
+    public void loadScene(string name)
+    {
+        SceneManager.LoadSceneAsync(name);
+    }
+
+    public void loadScene(int index)
+    {
+        SceneManager.LoadSceneAsync(index);
     }
 }

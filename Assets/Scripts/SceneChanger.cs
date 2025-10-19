@@ -9,10 +9,10 @@ public class SceneChanger : MonoBehaviour
 
     public void LoadPreviousLevel() {
         int n = PlayerPrefs.GetInt("PreviousLevel", 1);
-        SceneManager.LoadScene(n);
+        SceneManager.LoadSceneAsync(n);
     }
 
     public void LoadSceneByNumber(int num) {
-        SceneManager.LoadScene(num);
+        SceneManager.LoadSceneAsync(num);
     }
 }

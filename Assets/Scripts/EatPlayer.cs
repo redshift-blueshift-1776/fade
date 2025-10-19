@@ -44,6 +44,9 @@ public class EatPlayer : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneManager.LoadScene(9);
         yield return null;
     }
 }

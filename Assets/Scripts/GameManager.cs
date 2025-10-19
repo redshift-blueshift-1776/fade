@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
     private void killPlayer()
     {
         Debug.Log("you are dead!");
+        SceneManager.LoadScene(19);
     }
 
     public void setIsInCutscene(bool b)

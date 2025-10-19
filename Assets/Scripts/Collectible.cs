@@ -17,6 +17,7 @@ public class Collectible : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     [SerializeField] private GameObject model;
+    [SerializeField] private GameObject defaultModel;
     void Start()
     {
         if (gameManager == null)
@@ -31,12 +32,19 @@ public class Collectible : MonoBehaviour
         clipLength = audioSource.clip.length;
         player = GameObject.FindWithTag("Player");
         StartCoroutine(handleSound());
+
+        if (model != null)
+        {
+            defaultModel.GetComponent<MeshRenderer>().enabled = false;
+            GameObject instantiatedModel = Instantiate(model, transform);
+            instantiatedModel.transform.localPosition = Vector3.zero;
+            instantiatedModel.transform.localRotation = Quaternion.identity;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -49,7 +57,7 @@ public class Collectible : MonoBehaviour
             audioManager.playSound("pickupCollectible");
         }
     }
-    
+
     private IEnumerator handleSound()
     {
         float t = 0;
@@ -62,12 +70,23 @@ public class Collectible : MonoBehaviour
             if (t < cooldownTimer)
             {
                 t += Time.deltaTime;
-            } else
+            }
+            else
             {
                 audioSource.Play();
                 t = 0;
             }
             yield return null;
         }
+    }
+    
+    public void setCollectibleModel(GameObject obj)
+    {
+        Debug.Log("collectible received model8?");
+        model = obj;
+        defaultModel.GetComponent<MeshRenderer>().enabled = false;
+        GameObject instantiatedModel = Instantiate(model, transform);
+        instantiatedModel.transform.localPosition = Vector3.zero;
+        instantiatedModel.transform.localRotation = Quaternion.identity;
     }
 }

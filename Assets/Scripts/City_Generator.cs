@@ -33,6 +33,11 @@ public class City_Generator : MonoBehaviour
     [SerializeField] private GameObject emptyRoom;
     [SerializeField] private GameObject doorRoom;
     [SerializeField] private GameObject collectible;
+    [Header("Collectibles")]
+    [SerializeField] private GameObject model5;
+    [SerializeField] private GameObject model6;
+    [SerializeField] private GameObject model7;
+    [SerializeField] private GameObject model8;
 
     [Header("Hardcoded")]
     [SerializeField] public string[] hardcoded;
@@ -60,6 +65,7 @@ public class City_Generator : MonoBehaviour
     [SerializeField] private bool placeRandomRooms = true;
 
     private List<GameObject> keysAndCollectible = new List<GameObject>(); 
+
 
     private float[][] doorColors =
     {
@@ -234,6 +240,24 @@ public class City_Generator : MonoBehaviour
         GameObject newCollectible = Instantiate(collectible);
 
         newCollectible.transform.position = getGlobalCoordinates(i, 2.5f, j);
+
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log("scene " + sceneIndex);
+        Collectible script = newCollectible.GetComponent<Collectible>();
+        if (sceneIndex == 5)
+        {
+            script.setCollectibleModel(model5);
+        } else if (sceneIndex == 6)
+        {
+            script.setCollectibleModel(model6);
+        } else if (sceneIndex == 7)
+        {
+            script.setCollectibleModel(model7);
+        } else if (sceneIndex == 8)
+        {
+            Debug.Log("setting collectible model8 now!");
+            script.setCollectibleModel(model8);
+        }
         return newCollectible;
     }
 

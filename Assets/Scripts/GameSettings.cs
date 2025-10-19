@@ -7,8 +7,7 @@ public class GameSettings : MonoBehaviour
     public GameObject settings;
     public GameObject homePage;
     public GameObject mouseSettingsPage;
-
-    public Button mouseSettingsButton;
+    public GameObject videoSettingsPage;
 
     private bool inSettings;
     private bool gameEnded;
@@ -19,11 +18,6 @@ public class GameSettings : MonoBehaviour
         inSettings = false;
         gameEnded = false;
         settingStack = new Stack<string>();
-
-        mouseSettingsButton.onClick.AddListener(() =>
-        {
-            settingStack.Push("Mouse");
-        });
     }
 
     // Update is called once per frame
@@ -65,6 +59,7 @@ public class GameSettings : MonoBehaviour
     {
         homePage.SetActive(false);
         mouseSettingsPage.SetActive(false);
+        videoSettingsPage.SetActive(false);
     }
 
     private void setPage()
@@ -93,6 +88,14 @@ public class GameSettings : MonoBehaviour
                     disableAllPages();
                     mouseSettingsPage.SetActive(true);
                     break;
+                case "Video":
+                    disableAllPages();
+                    videoSettingsPage.SetActive(true);
+                    break;
+                default:
+                    disableAllPages();
+                    homePage.SetActive(true);
+                    break;
             }
             Time.timeScale = 0f;
         }
@@ -102,5 +105,10 @@ public class GameSettings : MonoBehaviour
     public bool isInSettings()
     {
         return inSettings;
+    }
+
+    public void addPage(string page)
+    {
+        settingStack.Push(page);
     }
 }

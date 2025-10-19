@@ -2190,6 +2190,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 295947967}
     - target: {fileID: 8067129835687233402, guid: 803dae597c81b43ec9661693f9c52d57, type: 3}
+      propertyPath: doorColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067129835687233402, guid: 803dae597c81b43ec9661693f9c52d57, type: 3}
+      propertyPath: doorColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067129835687233402, guid: 803dae597c81b43ec9661693f9c52d57, type: 3}
+      propertyPath: doorColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067129835687233402, guid: 803dae597c81b43ec9661693f9c52d57, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 1748425642}

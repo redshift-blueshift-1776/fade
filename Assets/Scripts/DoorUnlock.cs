@@ -19,35 +19,9 @@ public class DoorUnlock : MonoBehaviour
     private float targetReflectionIntensity;
     private Color targetAmbientColor;
 
-    [SerializeField] private DoorColor doorColor;
-    public enum DoorColor
-    {
-        RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE
-    }
-
-    private Color getColor()
-    {
-        switch (doorColor)
-        {
-            case DoorColor.RED:
-                return Color.red;
-            case DoorColor.ORANGE:
-                return new Color(1, 0.5f, 0);
-            case DoorColor.YELLOW:
-                return Color.yellow;
-            case DoorColor.GREEN:
-                return Color.green;
-            case DoorColor.BLUE:
-                return Color.blue;
-            case DoorColor.PURPLE:
-                return new Color(0.5f, 0, 1);
-            default:
-                return Color.black;
-        }
-    }
+    [SerializeField] private Color doorColor;
 
     private Material doorMaterial;
-    private Material keyMaterial;
 
     void Start()
     {
@@ -60,17 +34,22 @@ public class DoorUnlock : MonoBehaviour
         doorMaterial = door.GetComponent<MeshRenderer>().material;
 
         // Iterate through each immediate child Transform
+        updateColor();
+    }
+
+    private void updateColor()
+    {
         foreach (Transform block in key.transform)
         {
             // Add the child's GameObject to the list
             GameObject child = block.gameObject;
             Material blockMaterial = child.GetComponent<MeshRenderer>().material;
-            blockMaterial.color = getColor();
+            blockMaterial.color = doorColor;
             blockMaterial.EnableKeyword("_EMISSION");
-            blockMaterial.SetColor("_EmissionColor", getColor());
+            blockMaterial.SetColor("_EmissionColor", doorColor);
         }
 
-        doorMaterial.color = getColor();
+        doorMaterial.color = doorColor;
     }
 
     // Update is called once per frame
@@ -112,5 +91,9 @@ public class DoorUnlock : MonoBehaviour
         yield return null;
     }
 
-    
+    public void setColor(Color c)
+    {
+        doorColor = c;
+        updateColor();
+    }
 }

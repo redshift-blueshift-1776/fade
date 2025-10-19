@@ -6,6 +6,7 @@ using System;
 // using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering;
+using System.Linq;
 
 public class City_Generator : MonoBehaviour
 {
@@ -28,6 +29,9 @@ public class City_Generator : MonoBehaviour
     [SerializeField] public GameObject roof;
     [SerializeField] public GameObject specialRoof;
 
+    [SerializeField] private GameObject emptyRoom;
+    [SerializeField] private GameObject doorRoom;
+
     [Header("Hardcoded")]
     [SerializeField] public string[] hardcoded;
 
@@ -35,15 +39,32 @@ public class City_Generator : MonoBehaviour
     [SerializeField] public float p_flat_roof;
     [SerializeField] public float p_sloped_roof;
     [SerializeField] public float p_special_roof;
+    [SerializeField] private float probabilityOfEmptyRoomSpawning;
+
+
+    [SerializeField] private int manualDoorRooms;
 
     private HashSet<float[]> lightpoleGlobalPositions;
 
     public HashSet<int> hardcodedLocations;
+
+    private float[][] doorColors =
+    {
+        new float[] {1, 0, 0},
+        new float[] {1, 0.5f, 0},
+        new float[] {1, 1, 0},
+        new float[] {0, 1, 0},
+        new float[] {0, 0, 1},
+        new float[] {0.5f, 0, 1}
+    };
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         ParseHardcoded();
         GenerateCity();
+        
+        //shuffle
+        doorColors = doorColors.OrderBy(x => UnityEngine.Random.value).ToArray();
     }
 
     public void ParseHardcoded() {
@@ -108,7 +129,7 @@ public class City_Generator : MonoBehaviour
         float offset = Mathf.Max(building_x_length / 2f - sidewalk_width, 0);
         newSpecialRoof.transform.position = new Vector3(globalX - offset, height, globalZ);
         newSpecialRoof.transform.localScale = 100f / 12f * new Vector3(true_width, true_width, true_width);
-        
+
         newSpecialRoof = Instantiate(specialRoof);
         newSpecialRoof.transform.position = new Vector3(globalX + offset, height, globalZ);
         newSpecialRoof.transform.localRotation = Quaternion.Euler(0, 180, 0);
@@ -119,6 +140,27 @@ public class City_Generator : MonoBehaviour
             newRoof.transform.position = new Vector3(globalX, height, globalZ);
             newRoof.transform.localScale = 100f / 12f * new Vector3(2 * (building_x_length / 2f - sidewalk_width), true_width, true_width);
         }
+    }
+
+    public void GenerateEmptyRoom(int i, int j)
+    {
+        GameObject newEmptyRoom = Instantiate(emptyRoom);
+        float globalX = (i - (x_dimension - 1) / 2) * x_length;
+        float globalZ = (j - (z_dimension - 1) / 2) * z_length;
+
+        newEmptyRoom.transform.position = new Vector3(globalX, 0, globalZ);
+    }
+    
+    public void GenerateDoorRoom(int i, int j, Color c)
+    {
+        GameObject newDoorRoom = Instantiate(doorRoom);
+        float globalX = (i - (x_dimension - 1) / 2) * x_length;
+        float globalZ = (j - (z_dimension - 1) / 2) * z_length;
+
+        newDoorRoom.transform.position = new Vector3(globalX, 0, globalZ);
+
+        DoorUnlock script = newDoorRoom.GetComponent<DoorUnlock>();
+        script.setColor(c);
     }
 
     public void GenerateLightPoles(int i, int j)
@@ -145,8 +187,13 @@ public class City_Generator : MonoBehaviour
             Streetlight sl = newLightpole.GetComponent<Streetlight>();
             sl.displacement = (i + j) % 4;
 
-            lightpoleGlobalPositions.Add(new float[]{globalX, globalY + lightSourceLocalYOffset, globalZ});
+            lightpoleGlobalPositions.Add(new float[] { globalX, globalY + lightSourceLocalYOffset, globalZ });
         }
+    }
+
+    private void generateRooms()
+    {
+        
     }
 
     public void GenerateCity()
@@ -168,6 +215,9 @@ public class City_Generator : MonoBehaviour
                     } else if (rv < p_flat_roof + p_sloped_roof + p_special_roof) {
                         GenerateSpecialRoofedBuilding(i, j);
                     }
+                } else if (UnityEngine.Random.Range(0f, 1f) <= probabilityOfEmptyRoomSpawning)
+                {
+                    //generateRooms();
                 }
 
                 GameObject newSidewalk = Instantiate(sidewalk);

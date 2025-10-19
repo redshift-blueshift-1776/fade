@@ -1816,6 +1816,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 797665533}
     - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
+      propertyPath: willHelpPlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
       propertyPath: energyBarSlider
       value: 
       objectReference: {fileID: 797665536}
@@ -1975,6 +1979,18 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 295947967}
+    - target: {fileID: 8067129835687233402, guid: 803dae597c81b43ec9661693f9c52d57, type: 3}
+      propertyPath: doorColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067129835687233402, guid: 803dae597c81b43ec9661693f9c52d57, type: 3}
+      propertyPath: doorColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8067129835687233402, guid: 803dae597c81b43ec9661693f9c52d57, type: 3}
+      propertyPath: doorColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8067129835687233402, guid: 803dae597c81b43ec9661693f9c52d57, type: 3}
       propertyPath: gameManager
       value: 

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameSettings : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class GameSettings : MonoBehaviour
     public GameObject homePage;
     public GameObject mouseSettingsPage;
     public GameObject videoSettingsPage;
+    public GameObject audioSettingsPage;
+    public Slider audioSlider;
+    public TMP_Text audioText;
 
     private bool inSettings;
     private bool gameEnded;
@@ -19,6 +23,13 @@ public class GameSettings : MonoBehaviour
         inSettings = false;
         gameEnded = false;
         settingStack = new Stack<string>();
+
+        if (!PlayerPrefs.HasKey("volume"))
+        {
+            PlayerPrefs.SetFloat("volume", 0.5f);
+        }
+        audioSlider.value = PlayerPrefs.GetFloat("volume");
+        audioText.text = AudioListener.volume.ToString("F2");
     }
 
     // Update is called once per frame
@@ -45,6 +56,10 @@ public class GameSettings : MonoBehaviour
         }
 
         setPage();
+
+        PlayerPrefs.SetFloat("volume", audioSlider.value);
+        AudioListener.volume = audioSlider.value;
+        audioText.text = Mathf.Ceil(AudioListener.volume * 100f).ToString() + "%";
     }
 
     public bool getGameEnded()
@@ -62,6 +77,7 @@ public class GameSettings : MonoBehaviour
         homePage.SetActive(false);
         mouseSettingsPage.SetActive(false);
         videoSettingsPage.SetActive(false);
+        audioSettingsPage.SetActive(false); 
     }
 
     private void setPage()
@@ -93,6 +109,10 @@ public class GameSettings : MonoBehaviour
                 case "Video":
                     disableAllPages();
                     videoSettingsPage.SetActive(true);
+                    break;
+                case "Audio":
+                    disableAllPages();
+                    audioSettingsPage.SetActive(true);
                     break;
                 default:
                     disableAllPages();

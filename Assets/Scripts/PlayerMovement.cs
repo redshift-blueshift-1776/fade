@@ -58,8 +58,11 @@ public class PlayerMovement : MonoBehaviour
         }
         handleSensitivityChange();
 
-        Camera.main.fieldOfView = Mathf.Clamp(30f, fovSlider.value, 120f);
-        fovText.text = Camera.main.fieldOfView.ToString();
+        if (Camera.main != null)
+        {
+            Camera.main.fieldOfView = Mathf.Clamp(30f, fovSlider.value, 120f);
+            fovText.text = Camera.main.fieldOfView.ToString();
+        }
     }
 
     void FixedUpdate()

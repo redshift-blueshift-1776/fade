@@ -49,6 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   audioManager: {fileID: 0}
+  model: {fileID: 0}
+  defaultModel: {fileID: 8874804462742007456}
 --- !u!54 &1603896410663903334
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -186,7 +188,7 @@ GameObject:
   - component: {fileID: 2105616041146547685}
   - component: {fileID: 4554969804038194588}
   m_Layer: 0
-  m_Name: Model
+  m_Name: DefaultModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

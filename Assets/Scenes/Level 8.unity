@@ -1696,6 +1696,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 797665533}
     - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
+      propertyPath: timeUntilHelp
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
+      propertyPath: willHelpPlayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
       propertyPath: energyBarSlider
       value: 
       objectReference: {fileID: 797665536}
@@ -1703,6 +1711,10 @@ PrefabInstance:
       propertyPath: energyBarSymbol
       value: 
       objectReference: {fileID: 797665535}
+    - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
+      propertyPath: tutorialPointer
+      value: 
+      objectReference: {fileID: 3440728365419528257, guid: ed9bf730a2a404064a8c138ba32e502a, type: 3}
     - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
       propertyPath: energyNumberText
       value: 

@@ -926,6 +926,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialPointer
       objectReference: {fileID: 0}
+    - target: {fileID: 4703007263435245366, guid: ed9bf730a2a404064a8c138ba32e502a, type: 3}
+      propertyPath: destination
+      value: 
+      objectReference: {fileID: 117208631}
     - target: {fileID: 6063487136393399270, guid: ed9bf730a2a404064a8c138ba32e502a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 761.2023

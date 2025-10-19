@@ -4,15 +4,18 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using System.Threading;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private City_Generator cityGenerator;
+    [SerializeField] private GameObject tutorialPointer;
     [SerializeField] GameObject player;
     [SerializeField] private Slider energyBarSlider;
     [SerializeField] private Image energyBarSymbol;
     [SerializeField] private TMP_Text energyNumberText;
     [SerializeField] private Image energyBarFill;
+    [SerializeField] private bool willHelpPlayer = false;
     private PlayerMovement playerMovement;
     HashSet<float[]> lightpoleGlobalPositions = new HashSet<float[]>();
     private float energy = 100;
@@ -28,6 +31,10 @@ public class GameManager : MonoBehaviour
     {
         playerMovement = player.GetComponent<PlayerMovement>();
         initializeEnvironment();
+        if (willHelpPlayer)
+        {
+            StartCoroutine(handleHelpPlayer());
+        }
     }
 
     // Update is called once per frame
@@ -117,7 +124,6 @@ public class GameManager : MonoBehaviour
 
     private void killPlayer()
     {
-        Debug.Log("you are dead!");
         SceneManager.LoadScene(19);
     }
 
@@ -131,12 +137,55 @@ public class GameManager : MonoBehaviour
         StartCoroutine(toNextScene());
     }
 
-    public IEnumerator toNextScene() {
+    public IEnumerator toNextScene()
+    {
         isInCutscene = true;
         yield return new WaitForSeconds(2f);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         isInCutscene = false;
+        StopAllCoroutines();
         SceneManager.LoadScene(nextScene);
+    }
+
+    [SerializeField] private float timeUntilHelp = 120f;
+    private IEnumerator handleHelpPlayer()
+    {
+        yield return new WaitForSeconds(2f);
+        List<GameObject> keysAndCollectibles = cityGenerator.getKeysAndCollectible();
+
+        keysAndCollectibles.Reverse();
+        Stack<GameObject> stack = new Stack<GameObject>(keysAndCollectibles);
+
+        GameObject currPointer = GameObject.FindWithTag("TutorialPointer");
+        if (currPointer == null)
+        {
+            currPointer = Instantiate(tutorialPointer);
+        }
+        TutorialPointer script = currPointer.GetComponent<TutorialPointer>();
+
+        float t = 0;
+        bool waitingToShowNext = false;
+
+        while (true)
+        {
+            Debug.Log(t);
+            if (script.isDestinationCollected() && !waitingToShowNext && stack.Count > 0)
+            {
+                waitingToShowNext = true;
+                t = 0;
+            }
+
+            if (waitingToShowNext)
+            {
+                t += Time.deltaTime;
+                if (t >= timeUntilHelp)
+                {
+                    script.setDestination(stack.Pop());
+                    waitingToShowNext = false;
+                }
+            }
+            yield return null;
+        }
     }
 }

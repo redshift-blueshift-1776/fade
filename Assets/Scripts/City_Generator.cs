@@ -175,21 +175,34 @@ public class City_Generator : MonoBehaviour
         newBuilding.transform.localScale = new Vector3(building_x_length, (float)height, building_z_length);
 
         GameObject newSpecialRoof = Instantiate(specialRoof);
-        float true_width = (building_z_length + sidewalk_width) / 2;
-        float offset = Mathf.Max(building_x_length / 2f - sidewalk_width, 0);
-        newSpecialRoof.transform.position = new Vector3(globalX - offset, height, globalZ);
-        newSpecialRoof.transform.localScale = 100f / 12f * new Vector3(true_width, true_width, true_width);
+        float true_width = (Mathf.Min(building_x_length, building_z_length) + sidewalk_width) / 2;
+        float offset = Mathf.Max(Mathf.Abs(building_x_length - building_z_length) / 2, 0);
+        Vector3 roofPos1 = new Vector3(
+            globalX - (building_x_length >= building_z_length ? 1 : 0) * offset,
+            height,
+            globalZ
+            );
+        Vector3 roofPos2 = new Vector3(
+            globalX + (building_x_length >= building_z_length ? 1 : 0) * offset,
+            height,
+            globalZ
+            );
+        newSpecialRoof.transform.position = roofPos1;
+        newSpecialRoof.transform.localScale = 100f / 12f * new Vector3(true_width, true_width, (building_z_length + sidewalk_width) / 2);
 
         newSpecialRoof = Instantiate(specialRoof);
-        newSpecialRoof.transform.position = new Vector3(globalX + offset, height, globalZ);
+        newSpecialRoof.transform.position = roofPos2;
         newSpecialRoof.transform.localRotation = Quaternion.Euler(0, 180, 0);
-        newSpecialRoof.transform.localScale = 100f / 12f * new Vector3(true_width, true_width, true_width);
+        newSpecialRoof.transform.localScale = 100f / 12f * new Vector3(true_width, true_width, (building_z_length + sidewalk_width) / 2);
 
         if (2 * (building_x_length / 2f - sidewalk_width) > 0f)
         {
             GameObject newRoof = Instantiate(roof);
             newRoof.transform.position = new Vector3(globalX, height, globalZ);
-            newRoof.transform.localScale = 100f / 12f * new Vector3(2 * (building_x_length / 2f - sidewalk_width), true_width, true_width);
+            newRoof.transform.localScale = 100f / 12f * new Vector3(
+                Mathf.Max(building_x_length - building_z_length, 0),
+                true_width,
+                (building_z_length + sidewalk_width) / 2);
         }
     }
     public void GenerateEmptyRoom(int i, int j)

@@ -24,7 +24,6 @@ public class Collectible : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Collected");
             gameManager.collectedCollectible();
             gameObject.SetActive(false);
             audioManager.playSound("pickupCollectible");

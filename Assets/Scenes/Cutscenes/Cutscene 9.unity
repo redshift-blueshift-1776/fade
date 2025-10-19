@@ -1719,22 +1719,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9172411291131175079, guid: 23b8426cdd97248d1a9620f0fbd543d5, type: 3}
       propertyPath: images.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9172411291131175079, guid: 23b8426cdd97248d1a9620f0fbd543d5, type: 3}
       propertyPath: durations.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 9172411291131175079, guid: 23b8426cdd97248d1a9620f0fbd543d5, type: 3}
       propertyPath: 'images.Array.data[0]'
       value: 
-      objectReference: {fileID: 2800000, guid: 0064c5d1957d64723ad04ca8132439d4, type: 3}
+      objectReference: {fileID: 2800000, guid: 683862e3e33994ce093299c8861a9254, type: 3}
     - target: {fileID: 9172411291131175079, guid: 23b8426cdd97248d1a9620f0fbd543d5, type: 3}
       propertyPath: 'images.Array.data[1]'
       value: 
-      objectReference: {fileID: 2800000, guid: 916ca4b35730546ca829c247996341ad, type: 3}
+      objectReference: {fileID: 2800000, guid: b74410aa36b4e41f490975ba21b268dd, type: 3}
     - target: {fileID: 9172411291131175079, guid: 23b8426cdd97248d1a9620f0fbd543d5, type: 3}
       propertyPath: 'images.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2800000, guid: 0064c5d1957d64723ad04ca8132439d4, type: 3}
+    - target: {fileID: 9172411291131175079, guid: 23b8426cdd97248d1a9620f0fbd543d5, type: 3}
+      propertyPath: 'images.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2800000, guid: 916ca4b35730546ca829c247996341ad, type: 3}
+    - target: {fileID: 9172411291131175079, guid: 23b8426cdd97248d1a9620f0fbd543d5, type: 3}
+      propertyPath: 'images.Array.data[4]'
       value: 
       objectReference: {fileID: 2800000, guid: 916ca4b35730546ca829c247996341ad, type: 3}
     - target: {fileID: 9172411291131175079, guid: 23b8426cdd97248d1a9620f0fbd543d5, type: 3}
@@ -1747,6 +1755,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9172411291131175079, guid: 23b8426cdd97248d1a9620f0fbd543d5, type: 3}
       propertyPath: 'durations.Array.data[2]'
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172411291131175079, guid: 23b8426cdd97248d1a9620f0fbd543d5, type: 3}
+      propertyPath: 'durations.Array.data[3]'
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9172411291131175079, guid: 23b8426cdd97248d1a9620f0fbd543d5, type: 3}
+      propertyPath: 'durations.Array.data[4]'
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

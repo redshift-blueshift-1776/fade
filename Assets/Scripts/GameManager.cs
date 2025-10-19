@@ -135,6 +135,8 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator toNextScene() {
         yield return new WaitForSeconds(2f);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         SceneManager.LoadScene(nextScene);
     }
 }

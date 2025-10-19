@@ -182,7 +182,13 @@ public class GameManager : MonoBehaviour
                 t += Time.deltaTime;
                 if (t >= timeUntilHelp)
                 {
-                    script.setDestination(stack.Pop());
+                    GameObject newDest = stack.Pop();
+                    if (newDest.CompareTag("Collectible"))
+                    {
+                        GameObject actualModel = newDest.transform.Find("Model").gameObject;
+                        newDest = actualModel;
+                    }
+                    script.setDestination(newDest);
                     waitingToShowNext = false;
                 }
             }

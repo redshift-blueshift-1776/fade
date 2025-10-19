@@ -1224,8 +1224,10 @@ MonoBehaviour:
   - {fileID: 2800000, guid: e6c815c44af914466a6ddd054b051d1d, type: 3}
   - {fileID: 2800000, guid: 3bf504949f0c34a5b9a564a26e964979, type: 3}
   - {fileID: 2800000, guid: 7e1f49925cc0a49129f2e30d69f7e387, type: 3}
+  - {fileID: 2800000, guid: 557ab5f43d20b4daa9517ed47828d0b1, type: 3}
+  - {fileID: 2800000, guid: f0a37362180b5453b939ba34f9a4dd9c, type: 3}
   - {fileID: 2800000, guid: 916ca4b35730546ca829c247996341ad, type: 3}
-  durations: 3c0000003c0000003c0000003c00000001000000
+  durations: 3c0000003c0000003c0000003c000000500000003c00000001000000
   nextSceneNumber: 4
   imageDisplay: {fileID: 1364635907}
   canvas: {fileID: 2009130109}

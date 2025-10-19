@@ -1091,13 +1091,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   images:
-  - {fileID: 2800000, guid: 2867868cb23564b729a35fba124f1e11, type: 3}
-  - {fileID: 2800000, guid: 776b86528a60e424691ba5ece9262996, type: 3}
-  - {fileID: 2800000, guid: 46e5e7b7452cb413297a3af35c8517a4, type: 3}
-  - {fileID: 2800000, guid: 776b86528a60e424691ba5ece9262996, type: 3}
-  - {fileID: 2800000, guid: 46e5e7b7452cb413297a3af35c8517a4, type: 3}
-  - {fileID: 2800000, guid: 2867868cb23564b729a35fba124f1e11, type: 3}
-  durations: 0a0000001e0000001e000000140000000a00000001000000
+  - {fileID: 2800000, guid: c7844c0f166eb4cc58058169022b0d91, type: 3}
+  - {fileID: 2800000, guid: 916ca4b35730546ca829c247996341ad, type: 3}
+  durations: 1e00000001000000
   nextSceneNumber: 8
   imageDisplay: {fileID: 1364635907}
   canvas: {fileID: 2009130109}

@@ -62,7 +62,9 @@ public class City_Generator : MonoBehaviour
     {
         ParseHardcoded();
         GenerateCity();
-        
+
+        //empty and special rooms
+        generateRooms();
         //shuffle
         doorColors = doorColors.OrderBy(x => UnityEngine.Random.value).ToArray();
     }
@@ -194,6 +196,11 @@ public class City_Generator : MonoBehaviour
     private void generateRooms()
     {
         
+
+        if (UnityEngine.Random.Range(0f, 1f) <= probabilityOfEmptyRoomSpawning)
+                {
+                    //generateRooms();
+                }
     }
 
     public void GenerateCity()
@@ -215,9 +222,6 @@ public class City_Generator : MonoBehaviour
                     } else if (rv < p_flat_roof + p_sloped_roof + p_special_roof) {
                         GenerateSpecialRoofedBuilding(i, j);
                     }
-                } else if (UnityEngine.Random.Range(0f, 1f) <= probabilityOfEmptyRoomSpawning)
-                {
-                    //generateRooms();
                 }
 
                 GameObject newSidewalk = Instantiate(sidewalk);

@@ -346,6 +346,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 295947966}
     - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
+      propertyPath: uiCanvas
+      value: 
+      objectReference: {fileID: 1861221831}
+    - target: {fileID: 8800410216326768645, guid: 636b9fd64b5714b30a00f7ac45c6f57c, type: 3}
       propertyPath: nextScene
       value: 13
       objectReference: {fileID: 0}
@@ -1245,6 +1249,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1861221831 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1171624281230458910, guid: 43a9f5591d0fb488290d07bfcb319fe0, type: 3}
+  m_PrefabInstance: {fileID: 1861221826}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1866327563 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2235359772656600782, guid: 9f0a951aa107a4b02b0503935e2f919b, type: 3}

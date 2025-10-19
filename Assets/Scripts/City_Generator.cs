@@ -70,7 +70,7 @@ public class City_Generator : MonoBehaviour
     private float[][] doorColors =
     {
         new float[] {1, 0, 0},
-        new float[] {1, 0.5f, 0},
+        new float[] {1, 0.25f, 0},
         new float[] {1, 1, 0},
         new float[] {0, 1, 0},
         new float[] {0, 0, 1},

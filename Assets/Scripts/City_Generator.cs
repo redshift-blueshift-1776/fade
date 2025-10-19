@@ -239,10 +239,10 @@ public class City_Generator : MonoBehaviour
     {
         GameObject newCollectible = Instantiate(collectible);
 
-        newCollectible.transform.position = getGlobalCoordinates(i, 2.5f, j);
+        newCollectible.transform.position = getGlobalCoordinates(i, 4f, j);
 
         int sceneIndex = SceneManager.GetActiveScene().buildIndex;
-        Debug.Log("scene " + sceneIndex);
+        
         Collectible script = newCollectible.GetComponent<Collectible>();
         if (sceneIndex == 5)
         {
@@ -255,7 +255,6 @@ public class City_Generator : MonoBehaviour
             script.setCollectibleModel(model7);
         } else if (sceneIndex == 8)
         {
-            Debug.Log("setting collectible model8 now!");
             script.setCollectibleModel(model8);
         }
         return newCollectible;

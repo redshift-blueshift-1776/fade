@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.XR;
 
 public class Collectible : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Collectible : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         clipLength = audioSource.clip.length;
         player = GameObject.FindWithTag("Player");
+        StartCoroutine(handleSound());
     }
 
     // Update is called once per frame
@@ -30,6 +32,7 @@ public class Collectible : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            StopAllCoroutines();
             gameManager.collectedCollectible();
             gameObject.SetActive(false);
             audioManager.playSound("pickupCollectible");

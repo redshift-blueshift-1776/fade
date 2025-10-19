@@ -6,6 +6,8 @@ TagManager:
   tags:
   - GameManager
   - TutorialPointer
+  - Collectible
+  - CollectibleModel
   layers:
   - Default
   - TransparentFX

@@ -1399,7 +1399,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: b65f20dcf6d1644a2ad516e8180ad57a, type: 3}
+  m_Resource: {fileID: 8300000, guid: a3778ebbcff604bec88bfce8eea8dd65, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.15
   m_Pitch: 0.9
@@ -1514,7 +1514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1611459013}
   secondsPerBeat: 0
-  tempo: 90
+  tempo: 120
 --- !u!1 &1698089671
 GameObject:
   m_ObjectHideFlags: 0

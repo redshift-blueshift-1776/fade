@@ -61,8 +61,7 @@ public class Cutscene1 : MonoBehaviour
 "When I was in the game dev program…",
 "There was the boat trip…",
 "Where I lost something important to me…",
-"Lan was my favorite game developer…",
-"And he gave me a toy monster…",
+"When I was young, someone gave me a toy monster…",
 "Only for the wind to blow it off the boat…",
 "The boat was over Atlantis… so it's really lost…",
 "My game development skills were never the same after that.",
@@ -77,7 +76,7 @@ public class Cutscene1 : MonoBehaviour
 "That the root of my inspiration is still in Atlantis…"
 
         };
-        
+
         foreach (string line in lines)
         {
             yield return StartCoroutine(DoLine(line));

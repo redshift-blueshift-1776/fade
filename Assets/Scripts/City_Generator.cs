@@ -213,6 +213,7 @@ public class City_Generator : MonoBehaviour
     }
     public void GenerateEmptyRoom(int i, int j)
     {
+
         GameObject newEmptyRoom = Instantiate(emptyRoom);
 
         newEmptyRoom.transform.position = getGlobalCoordinates(i, 0, j);

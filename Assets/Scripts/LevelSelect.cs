@@ -15,6 +15,8 @@ public class LevelSelect : MonoBehaviour
     [SerializeField] public float pageWidth = 1920f;
     [SerializeField] public GameObject nextButton;
     [SerializeField] public GameObject previousButton;
+    [SerializeField] public GameObject firstButton;
+    [SerializeField] public GameObject lastButton;
 
     private int currentPage = 0;
     private bool isSliding = false;
@@ -30,20 +32,39 @@ public class LevelSelect : MonoBehaviour
             pages[i].SetActive(i == currentPage || i == currentPage + 1 || i == currentPage - 1);
         }
     }
+    private void Update()
+    {
+        if (pages.Length >= 3)
+        {
+            firstButton.SetActive(currentPage > 1);
+            lastButton.SetActive(currentPage < pages.Length - 2);
+        }
+    }
 
     public void OnNextPage()
     {
         if (isSliding || currentPage >= pages.Length - 1) return;
-        StartCoroutine(SlideToPage(currentPage + 1));
+        StartCoroutine(SlideToPage(currentPage + 1, false));
     }
 
     public void OnPrevPage()
     {
         if (isSliding || currentPage <= 0) return;
-        StartCoroutine(SlideToPage(currentPage - 1));
+        StartCoroutine(SlideToPage(currentPage - 1, false));
     }
 
-    IEnumerator SlideToPage(int newPage)
+    public void OnFirstPage()
+    {
+        if (isSliding || currentPage == 0) return;
+        StartCoroutine(SlideToPage(0, true));
+    }
+
+    public void OnLastPage()
+    {
+        if (isSliding || currentPage == pages.Length - 1) return;
+        StartCoroutine(SlideToPage(pages.Length - 1, true));
+    }
+    private IEnumerator SlideToPage(int newPage, bool skipping)
     {
         isSliding = true;
 
@@ -81,8 +102,15 @@ public class LevelSelect : MonoBehaviour
         {
             RectTransform rt = pages[i].GetComponent<RectTransform>();
             rt.anchoredPosition = new Vector2((i - newPage) * pageWidth, 0);
-            // Only keep visible ones active
-            pages[i].SetActive(i == newPage || i == newPage + 1 || i == newPage - 1);
+            // only keep visible ones active
+            if (skipping)
+            {
+                pages[i].SetActive(true);
+            }
+            else
+            {
+                pages[i].SetActive(i == newPage || i == newPage + 1 || i == newPage - 1);
+            }
         }
 
         currentPage = newPage;

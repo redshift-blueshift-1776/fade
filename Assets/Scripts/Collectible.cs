@@ -110,7 +110,6 @@ public class Collectible : MonoBehaviour
     
     public void setCollectibleModel(GameObject obj)
     {
-        Debug.Log("collectible received model8?");
         model = obj;
         defaultModel.GetComponent<MeshRenderer>().enabled = false;
         GameObject instantiatedModel = Instantiate(model, transform);

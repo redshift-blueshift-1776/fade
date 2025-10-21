@@ -11,12 +11,12 @@ using NUnit.Framework;
 
 public class CityGeneratorAutomatic : MonoBehaviour
 {
-    [SerializeField] private GameManager gameManager;
+    [SerializeField] private GameManagerAutomatic gameManager;
     [SerializeField] private bool menuOrLevelSelect;
 
     [Header("Dimensions")]
-    private int x_dimension; // Should be an odd number
-    private int z_dimension; // Should be an odd number
+    private int x_dimension;
+    private int z_dimension;
     private float x_length;
     private float z_length;
     [SerializeField] public float sidewalk_width;
@@ -46,10 +46,10 @@ public class CityGeneratorAutomatic : MonoBehaviour
     [SerializeField] public float p_flat_roof;
     [SerializeField] public float p_sloped_roof;
     [SerializeField] public float p_special_roof;
-    [SerializeField] private float probabilityOfEmptyRoomSpawning;
+    private float probabilityOfEmptyRoomSpawning;
 
 
-    [SerializeField] private int numberOfDoorRooms;
+    private int numberOfDoorRooms;
 
     private HashSet<float[]> lightpoleGlobalPositions;
 
@@ -57,26 +57,164 @@ public class CityGeneratorAutomatic : MonoBehaviour
 
     private Stack<int[]> doorRoomLocations;
 
-    [SerializeField] private bool useHardcodedLocations = true;
-    [SerializeField] private float percentAutomaticLocations = 1f;
+    private bool useHardcodedLocations = false;
+    private float percentAutomaticLocations;
 
-    [SerializeField] private bool shuffleDoorColors = false;
+    private bool shuffleDoorColors;
 
-    [SerializeField] private bool placeRandomRooms = true;
+    private bool placeRandomRooms = true;
 
     private List<GameObject> keysAndCollectible = new List<GameObject>();
 
 
     private float[][] doorColors =
     {
-        new float[] {1, 0, 0},
-        new float[] {1, 0.25f, 0},
-        new float[] {1, 1, 0},
-        new float[] {0, 1, 0},
-        new float[] {0, 0, 1},
-        new float[] {0.5f, 0, 1}
+        new float[] {1, 0, 0},            // Red
+        new float[] {1, 0.25f, 0},        // Orange
+        new float[] {1, 1, 0},            // Yellow
+        new float[] {0, 1, 0},            // Green
+        new float[] {0, 0, 1},            // Blue
+        new float[] {0.5f, 0, 1},         // Purple
+        new float[] {0f, 1f, 1f},         // Cyan
+        new float[] {1f, 0f, 1f},         // Magenta
+        new float[] {1f, 1f, 1f},         // White
+        new float[] {0f, 0f, 0f},         // Black
+        new float[] {0.5f, 0.5f, 0.5f},   // Gray
+        new float[] {1f, 0.75f, 0.8f},    // Pink
+        new float[] {0.6f, 0.3f, 0f},     // Brown
+        new float[] {0.75f, 0.25f, 0.25f},// Brick red
+        new float[] {0.25f, 0.5f, 0.25f}, // Forest green
+        new float[] {0.25f, 0.25f, 0.5f}, // Navy blue
+        new float[] {0.5f, 0.5f, 0f},     // Olive
+        new float[] {0.5f, 0f, 0.5f},     // Purple
+        new float[] {0.8f, 0.8f, 0.8f},   // Light gray
+        new float[] {0.3f, 0.3f, 0.3f},   // Dark gray
+        new float[] {0.9f, 0.7f, 0.4f},   // Tan / beige
+        new float[] {0.9f, 0.1f, 0.1f},
+        new float[] {0.8f, 0.2f, 0.2f},
+        new float[] {0.7f, 0.3f, 0.3f},
+        new float[] {0.6f, 0.4f, 0.4f},
+        new float[] {0.5f, 0.5f, 0.5f},
+        new float[] {0.4f, 0.6f, 0.6f},
+        new float[] {0.3f, 0.7f, 0.7f},
+        new float[] {0.2f, 0.8f, 0.8f},
+        new float[] {0.1f, 0.9f, 0.9f},
+        new float[] {0.9f, 0.9f, 0.1f},
+        new float[] {0.8f, 0.8f, 0.2f},
+        new float[] {0.7f, 0.7f, 0.3f},
+        new float[] {0.6f, 0.6f, 0.4f},
+        new float[] {0.5f, 0.5f, 0.6f},
+        new float[] {0.4f, 0.4f, 0.7f},
+        new float[] {0.3f, 0.3f, 0.8f},
+        new float[] {0.2f, 0.2f, 0.9f},
+        new float[] {0.9f, 0.2f, 0.5f},
+        new float[] {0.8f, 0.3f, 0.6f},
+        new float[] {0.7f, 0.4f, 0.7f},
+        new float[] {0.6f, 0.5f, 0.8f},
+        new float[] {0.5f, 0.6f, 0.9f},
+        new float[] {0.4f, 0.7f, 0.5f},
+        new float[] {0.3f, 0.8f, 0.4f},
+        new float[] {0.2f, 0.9f, 0.3f},
+        new float[] {0.1f, 0.7f, 0.1f},
+        new float[] {0.7f, 0.9f, 0.2f},
+        new float[] {0.6f, 0.8f, 0.3f},
+        new float[] {0.5f, 0.7f, 0.4f},
+        new float[] {0.4f, 0.6f, 0.5f},
+        new float[] {0.3f, 0.5f, 0.6f},
+        new float[] {0.2f, 0.4f, 0.7f},
+        new float[] {0.1f, 0.3f, 0.8f},
+        new float[] {0.9f, 0.8f, 0.7f},
+        new float[] {0.8f, 0.7f, 0.6f},
+        new float[] {0.7f, 0.6f, 0.5f},
+        new float[] {0.6f, 0.5f, 0.4f},
+        new float[] {0.5f, 0.4f, 0.3f},
+        new float[] {0.4f, 0.3f, 0.2f},
+        new float[] {0.3f, 0.2f, 0.1f},
+        new float[] {0.8f, 0.5f, 0.2f},
+        new float[] {0.7f, 0.4f, 0.1f},
+        new float[] {0.6f, 0.3f, 0.2f},
+        new float[] {0.5f, 0.2f, 0.3f},
+        new float[] {0.4f, 0.1f, 0.4f},
+        new float[] {0.3f, 0f, 0.5f},
+        new float[] {0.2f, 0f, 0.6f},
+        new float[] {0.1f, 0f, 0.7f},
+        new float[] {0f, 0f, 0.8f},
+        new float[] {0f, 0.1f, 0.9f},
+        new float[] {0f, 0.2f, 1f},
+        new float[] {0f, 0.3f, 0.9f},
+        new float[] {0f, 0.4f, 0.8f},
+        new float[] {0f, 0.5f, 0.7f},
+        new float[] {0f, 0.6f, 0.6f},
+        new float[] {0f, 0.7f, 0.5f},
+        new float[] {0f, 0.8f, 0.4f},
+        new float[] {0f, 0.9f, 0.3f},
+        new float[] {0f, 1f, 0.2f},
+        new float[] {0.1f, 1f, 0.1f},
+        new float[] {0.2f, 1f, 0f},
+        new float[] {0.3f, 0.9f, 0f},
+        new float[] {0.4f, 0.8f, 0f},
+        new float[] {0.5f, 0.7f, 0f},
+        new float[] {0.6f, 0.6f, 0f},
+        new float[] {0.7f, 0.5f, 0f},
+        new float[] {0.8f, 0.4f, 0f},
+        new float[] {0.9f, 0.3f, 0f},
+        new float[] {1f, 0.2f, 0f},
+        new float[] {1f, 0.1f, 0.2f},
+        new float[] {1f, 0.2f, 0.4f},
+        new float[] {1f, 0.3f, 0.6f},
+        new float[] {1f, 0.4f, 0.8f},
+        new float[] {1f, 0.5f, 1f},
+        new float[] {0.9f, 0.6f, 1f},
+        new float[] {0.8f, 0.7f, 1f},
+        new float[] {0.7f, 0.8f, 1f},
+        new float[] {0.6f, 0.9f, 1f},
+        new float[] {0.5f, 1f, 1f},
+        new float[] {0.4f, 1f, 0.8f},
+        new float[] {0.3f, 1f, 0.6f},
+        new float[] {0.2f, 1f, 0.4f},
+        new float[] {0.1f, 1f, 0.2f},
+        new float[] {0.2f, 0.2f, 0.2f},
+        new float[] {0.4f, 0.4f, 0.4f},
+        new float[] {0.6f, 0.6f, 0.6f},
+        new float[] {0.8f, 0.8f, 0.8f},
+        new float[] {1f, 0.8f, 0.6f},
+        new float[] {0.8f, 0.6f, 0.4f},
+        new float[] {0.6f, 0.4f, 0.2f},
+        new float[] {0.4f, 0.2f, 0f},
+        new float[] {0.2f, 0.1f, 0f},
+        new float[] {0.9f, 0.9f, 0.9f},
+        new float[] {0.95f, 0.95f, 0.95f},
+        new float[] {0.1f, 0.05f, 0.05f},
+        new float[] {0.05f, 0.1f, 0.1f},
+        new float[] {0.1f, 0.05f, 0.1f},
+        new float[] {0.05f, 0.1f, 0.05f},
     };
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public void Start()
+    {
+        x_dimension = PlayerPrefs.GetInt("xDim");
+        z_dimension = PlayerPrefs.GetInt("zDim");
+        x_length = PlayerPrefs.GetInt("xWidth");
+        z_length = PlayerPrefs.GetInt("zWidth");
+
+        percentAutomaticLocations = PlayerPrefs.GetFloat("emptyTileProb");
+        probabilityOfEmptyRoomSpawning = PlayerPrefs.GetFloat("emptyRoomProb");
+
+        numberOfDoorRooms = PlayerPrefs.GetInt("numDoorRooms");
+        numberOfDoorRooms = Mathf.Min(numberOfDoorRooms, (int)Mathf.Ceil(percentAutomaticLocations * x_dimension * z_dimension));
+        shuffleDoorColors = PlayerPrefs.GetInt("shuffleDoorColors") == 1 ? true : false;
+
+        Initialize();
+    }
+
+    public Vector3 getSafeSpawnLocationNearOrigin()
+    {
+        return new Vector3(
+            PlayerPrefs.GetInt("xWidth") / 2,
+            5,
+            PlayerPrefs.GetInt("zWidth") / 2
+            );
+    }
     public void Initialize()
     {
         if (shuffleDoorColors)
@@ -127,7 +265,6 @@ public class CityGeneratorAutomatic : MonoBehaviour
     {
         int totalLocations = x_dimension * z_dimension;
         int emptyLocations = (int)Mathf.Ceil(percentAutomaticLocations * totalLocations);
-
         HashSet<int[]> locationCoordinates = new HashSet<int[]>();
         for (int i = 0; i < x_dimension; i++)
         {
@@ -263,8 +400,24 @@ public class CityGeneratorAutomatic : MonoBehaviour
         else if (sceneIndex == 8)
         {
             script.setCollectibleModel(model8);
+        } else if (sceneIndex == 23)
+        {
+            float rng = UnityEngine.Random.Range(0f, 1f);
+            if (rng < 0.25)
+            {
+                script.setCollectibleModel(model5);
+            } else if (rng < 0.5)
+            {
+                script.setCollectibleModel(model6);
+            } else if (rng < 0.75)
+            {
+                script.setCollectibleModel(model7);
+            } else
+            {
+                script.setCollectibleModel(model8);
+            }
         }
-        return newCollectible;
+            return newCollectible;
     }
 
     public void GenerateLightPoles(int i, int j)

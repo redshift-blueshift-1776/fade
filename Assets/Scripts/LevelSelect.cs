@@ -88,6 +88,6 @@ public class LevelSelect : MonoBehaviour
         currentPage = newPage;
         isSliding = false;
         previousButton.SetActive(currentPage > 0);
-        nextButton.SetActive(currentPage < 7);
+        nextButton.SetActive(currentPage < pages.Length - 1);
     }
 }
